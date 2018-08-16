@@ -1,0 +1,70 @@
+{
+  "name": "react-project",
+  "version": "1.0.0",
+  "description": "React project.",
+  "main": "index.js",
+  "author": "lovelope",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "postcommit": "git update-index --again"
+  },
+  "dependencies": {
+    "history": "^4.7.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-rc.1",
+    "@babel/plugin-transform-runtime": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/preset-react": "^7.0.0-rc.1",
+    "@babel/register": "^7.0.0-rc.1",
+    "@babel/runtime": "^7.0.0-rc.1",
+    "autoprefixer": "^9.1.1",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^8.0.0-beta.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.11.1",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^0.14.3",
+    "internal-ip": "^3.0.1",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^7.2.2",
+    "mini-css-extract-plugin": "^0.4.1",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.14.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "lint-staged": {
+    "**/*.{html,css,less,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "browserslist": [
+    "Android >= 4",
+    "iOS >= 8",
+    "> 1% in CN"
+  ]
+}
