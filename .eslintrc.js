@@ -4,12 +4,12 @@ module.exports = {
     es6: true,
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
+  parser: 'babel-eslint',
   parserOptions: {
-    parser: 'babel-eslint',
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
+      impliedStrict: true, // 全局严格模式
     },
   },
   rules: {
