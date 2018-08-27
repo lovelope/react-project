@@ -38,6 +38,7 @@
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.0.1",
+    "eslint-import-resolver-alias": "^1.1.1",
     "eslint-loader": "^2.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
@@ -64,7 +65,7 @@
   "lint-staged": {
     "*.{js,jsx,css,less,json}": [
       "prettier --config prettier.config.js --write",
-      "git add"
+      "git add -f"
     ],
     "yarn.lock": [
       "git rm --cached"

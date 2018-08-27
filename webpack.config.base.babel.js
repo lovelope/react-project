@@ -17,6 +17,13 @@ export default {
     path: paths.appDist,
   },
   devtool: 'cheap-module-source-map',
+  resolve: {
+    alias: {
+      '@': paths.appSrc,
+    },
+    extensions: ['.js', '.jsx', '.json'],
+    modules: ['node_modules'],
+  },
   module: {
     rules: [
       {
