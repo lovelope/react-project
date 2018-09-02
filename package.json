@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.development.babel.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.development.babel.js --color --progress",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.babel.js",
     "lint": "eslint .",
     "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'",
