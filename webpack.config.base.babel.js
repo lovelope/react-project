@@ -18,7 +18,7 @@ export default {
     chunkFilename: 'js/[name].chunk.js', // 非入口代码分块文件名规则
     path: paths.appDist,
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-source-map',
   resolve: {
     alias: {
       '@': paths.appSrc,

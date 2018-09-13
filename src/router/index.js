@@ -13,6 +13,11 @@ const About = Loadable({
   loading: Loading,
 });
 
+const Edit = Loadable({
+  loader: () => import(/* webpackChunkName: "About" */ '@/pages/Edit'),
+  loading: Loading,
+});
+
 export default [
   {
     path: '/',
@@ -23,5 +28,10 @@ export default [
     path: '/about',
     name: 'About',
     component: About,
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit,
   },
 ];
