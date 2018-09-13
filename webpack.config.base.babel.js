@@ -5,10 +5,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import paths, { DIST } from './paths';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const IS_USE_SOURCE_MAP = true;
 
 export default {
-  mode: 'development',
+  mode: isProd ? 'production' : 'development',
   entry: [paths.appIndexJs], // 入口
   output: {
     // 产出
@@ -16,7 +18,7 @@ export default {
     chunkFilename: 'js/[name].chunk.js', // 非入口代码分块文件名规则
     path: paths.appDist,
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -54,26 +56,30 @@ export default {
           },
           {
             test: /\.css$/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: { importLoaders: 1, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量1，postcss-loader
-              },
-              { loader: 'postcss-loader', options: { indent: 'postcss' } },
-            ],
+            use: isProd
+              ? [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: { importLoaders: 1, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量1，postcss-loader
+                  },
+                  'postcss-loader',
+                ]
+              : ['style-loader', 'css-loader'],
           },
           {
             test: /\.less$/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: { importLoaders: 2, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量2， less-loader + postcss-loader
-              },
-              { loader: 'postcss-loader', options: { indent: 'postcss' } },
-              'less-loader',
-            ],
+            use: isProd
+              ? [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: { importLoaders: 2, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量2， less-loader + postcss-loader
+                  },
+                  'postcss-loader',
+                  'less-loader',
+                ]
+              : ['style-loader', 'css-loader', 'less-loader'],
           },
           {
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
@@ -94,7 +100,8 @@ export default {
     }),
     new webpack.HotModuleReplacementPlugin(), // 模块热替换
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:8].css',
+      filename: isProd ? 'css/[name].[contenthash:8].css' : '[name].css',
+      chunkFilename: isProd ? 'css/[id].[contenthash:8].css' : '[id].css',
     }),
   ],
 };

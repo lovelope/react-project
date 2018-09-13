@@ -1,7 +1,12 @@
-/* eslint-disable global-require, import/no-extraneous-dependencies */
-module.exports = {
-  plugins: [
-    require('postcss-flexbugs-fixes'), // 解决flex的bug
-    require('autoprefixer'), // css前缀补全，autoprefixer 使用.browserlistrc或者package.json的browserlist字段
-  ],
-};
+// plugin的 {key: value} 对应 { pluginName: pluginOptions }，postcss会自动查找插件
+
+module.exports = ctx => ({
+  parser: ctx.parser ? 'sugarss' : false,
+  map: ctx.env === 'development' ? ctx.map : false,
+  plugins: {
+    'postcss-preset-env': {
+      stage: 3,
+    },
+    cssnano: ctx.env === 'production' ? {} : false,
+  },
+});
