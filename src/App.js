@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Router, Switch, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 
-import routes from './router';
-import './App.less';
+import routes from '@/router';
+import '@/App.less';
 
 const his = createBrowserHistory();
 

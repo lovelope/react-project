@@ -10,3 +10,6 @@ package-lock.json
 
 .idea/
 .vscode/
+
+# path-intellisense.mappings 路径别名
+!/.vscode/settings.json
