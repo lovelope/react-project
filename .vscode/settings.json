@@ -1,4 +1,8 @@
 {
+  // 修饰器语法支持
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+
+  // 路径映射智能提示
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src"
   }

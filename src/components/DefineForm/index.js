@@ -24,7 +24,27 @@ const renderFormItem = ({ item, layout, getFieldDecorator }) => {
   );
 };
 
-class DefineForm extends Component {
+@Form.create()
+export default class DefineForm extends Component {
+  static propTypes = {
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        required: PropTypes.bool,
+        component: PropTypes.element,
+        rules: PropTypes.arrayOf(PropTypes.shape({})),
+        options: PropTypes.shape({}),
+      })
+    ).isRequired,
+    layout: PropTypes.shape({}),
+    form: PropTypes.shape({}).isRequired,
+  };
+
+  static defaultProps = {
+    layout: defaultFormItemLayout,
+  };
+
   render() {
     // items格式即为配置的表单项
     const {
@@ -40,24 +60,3 @@ class DefineForm extends Component {
     );
   }
 }
-
-DefineForm.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      required: PropTypes.bool,
-      component: PropTypes.element,
-      rules: PropTypes.arrayOf(PropTypes.shape({})),
-      options: PropTypes.shape({}),
-    })
-  ).isRequired,
-  layout: PropTypes.shape({}),
-  form: PropTypes.shape({}).isRequired,
-};
-
-DefineForm.defaultProps = {
-  layout: defaultFormItemLayout,
-};
-
-export default Form.create()(DefineForm);
