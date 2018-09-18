@@ -11,7 +11,7 @@ const IS_USE_SOURCE_MAP = true;
 
 export default {
   mode: isProd ? 'production' : 'development',
-  entry: [paths.appIndexJs], // 入口
+  entry: ['@babel/polyfill', paths.appIndexJs], // 入口
   output: {
     // 产出
     filename: 'js/[name].bundle.js', // 入口文件名
