@@ -40,11 +40,11 @@ class Edit extends Component {
 
   onClickSubmit = () => {
     this.formRef.current.validateFieldsAndScroll((err, values) => {
-      console.log(values);
+      console.info(values);
       if (err) {
         return;
       }
-      console.log('校验通过');
+      console.info('校验通过');
     });
   };
 
