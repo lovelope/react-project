@@ -5,8 +5,10 @@ const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 export const DIST = 'dist'; // 产出文件夹
+export const PUBLIC_PATH = '/'; // publicPath
 
 const paths = {
+  appRoot: appDirectory,
   appDist: resolveApp(DIST),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
