@@ -2,23 +2,43 @@ import webpack from 'webpack';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
 
-import paths, { DIST } from './paths';
+import paths, { DIST, PUBLIC_PATH } from './paths';
+// import pkg from './package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
+const isVerbose = process.argv.includes('--verbose');
+
+// const reScript = /\.(js|jsx|mjs)$/;
+// const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
+// const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 const IS_USE_SOURCE_MAP = true;
 
 export default {
+  context: paths.appRoot,
+
   mode: isProd ? 'production' : 'development',
+
   entry: ['@babel/polyfill', paths.appIndexJs], // 入口
+
+  // 产出
   output: {
-    // 产出
-    filename: 'js/[name].bundle.js', // 入口文件名
-    chunkFilename: 'js/[name].chunk.js', // 非入口代码分块文件名规则
     path: paths.appDist,
+    publicPath: PUBLIC_PATH,
+    pathinfo: isVerbose,
+    // 入口文件名
+    filename: isProd ? 'js/[name].js' : 'js/[name].[hash:8].js',
+    // 非入口代码分块文件名规则
+    chunkFilename: isProd ? 'js/[name].chunk.js' : '[name].[hash:8].chunk.js',
+    // 格式化 windows 上的文件路径
+    devtoolModuleFilenameTemplate: info =>
+      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
-  devtool: 'eval-source-map',
+
+  devtool: isProd ? 'cheap-module-inline-source-map' : 'source-map',
+
   resolve: {
     alias: {
       '@': paths.appSrc,
@@ -26,6 +46,7 @@ export default {
     extensions: ['.js', '.jsx', '.json'],
     modules: ['node_modules'],
   },
+
   module: {
     rules: [
       {
@@ -99,6 +120,7 @@ export default {
       },
     ],
   },
+
   plugins: [
     new CleanWebpackPlugin([DIST]), // 清理旧文件
     new HtmlWebpackPlugin({
