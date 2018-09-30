@@ -3,13 +3,8 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    'airbnb',
-    'plugin:css-modules/recommended',
-    'prettier',
-    'prettier/react',
-  ],
-  plugins: ['css-modules', 'prettier'],
+  extends: ['airbnb', 'prettier', 'prettier/react'],
+  plugins: ['prettier'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,

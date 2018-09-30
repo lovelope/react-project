@@ -1,10 +1,9 @@
 import webpack from 'webpack';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
-import paths, { DIST, PUBLIC_PATH } from './paths';
+import paths, { PUBLIC_PATH } from './paths';
 // import pkg from './package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -122,15 +121,15 @@ export default {
   },
 
   plugins: [
-    new CleanWebpackPlugin([DIST]), // 清理旧文件
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
-    }),
-    new webpack.HotModuleReplacementPlugin(), // 模块热替换
-    new MiniCssExtractPlugin({
-      filename: isProd ? 'css/[name].[contenthash:8].css' : '[name].css',
-      chunkFilename: isProd ? 'css/[id].[contenthash:8].css' : '[id].css',
-    }),
+    // 优化 moment 包大小，去除本地化内容
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
+
+  node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty',
+  },
 };
