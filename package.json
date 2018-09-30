@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.development.babel.js --color --progress",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.babel.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config tools/webpack.config.development.babel.js --color --progress",
+    "build": "cross-env NODE_ENV=production webpack --config tools/webpack.config.production.babel.js",
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "lint-css": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\"",
     "lint": "yarn run lint-js && yarn run lint-css",
@@ -52,7 +52,6 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-import-resolver-alias": "^1.1.1",
     "eslint-loader": "^2.1.0",
-    "eslint-plugin-css-modules": "^2.9.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
