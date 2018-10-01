@@ -25,7 +25,7 @@ const renderFormItem = ({ item, layout, getFieldDecorator }) => {
 };
 
 @Form.create()
-export default class DefineForm extends Component {
+class DefineForm extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({
@@ -60,3 +60,5 @@ export default class DefineForm extends Component {
     );
   }
 }
+
+export default DefineForm;

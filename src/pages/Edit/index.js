@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Button } from 'antd';
 import DefineForm, { defaultLabelColSpan } from '@/components/DefineForm';
+import autobind from '@/utils/autobind';
 // formItems即为表单的配置项
 import formItems from './customFormItems';
 
@@ -26,41 +27,52 @@ const requestDetail = () =>
 class Edit extends Component {
   constructor(props) {
     super(props);
-    this.formRef = React.createRef();
+    this.formRef = null;
   }
 
-  getDetail = () => {
+  @autobind
+  handleGetDetail() {
     requestDetail().then(res => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
       res.RangePicker = res.RangePicker.map(d => moment(d));
-      this.formRef.current.setFieldsValue(res);
+      this.formRef.setFieldsValue(res);
     });
-  };
+  }
 
-  onClickSubmit = () => {
-    this.formRef.current.validateFieldsAndScroll((err, values) => {
+  @autobind
+  handleSubmit() {
+    this.formRef.validateFieldsAndScroll((err, values) => {
       console.info(values);
       if (err) {
         return;
       }
       console.info('校验通过');
     });
-  };
+  }
 
   render() {
     return (
       <div>
-        <Button style={{ margin: 24 }} type="primary" onClick={this.getDetail}>
+        <Button
+          style={{ margin: 24 }}
+          type="primary"
+          onClick={this.handleGetDetail}
+        >
           模拟请求数据然后设置表单值
         </Button>
 
-        <DefineForm ref={this.formRef} items={formItems} />
+        <DefineForm
+          ref={node => {
+            this.formRef = node;
+          }}
+          items={formItems}
+        />
 
         <Button
           style={{ marginLeft: `${(defaultLabelColSpan / 24) * 100}%` }}
           type="primary"
-          onClick={this.onClickSubmit}
+          onClick={this.handleSubmit}
         >
           提交
         </Button>

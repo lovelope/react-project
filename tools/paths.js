@@ -15,6 +15,7 @@ const paths = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
+  appTheme: resolveApp('src/theme.less'),
 };
 
 export default paths;

@@ -4,6 +4,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 import paths, { PUBLIC_PATH } from './paths';
+import getTheme from './theme';
+
+// 覆盖 antd 主题
+const theme = getTheme(paths.appTheme);
 
 const isProd = process.env.NODE_ENV === 'production';
 const isVerbose = process.argv.includes('--verbose');
@@ -149,7 +153,13 @@ export default {
                     },
                   },
                   'postcss-loader',
-                  'less-loader',
+                  {
+                    loader: 'less-loader',
+                    options: {
+                      javascriptEnabled: true,
+                      modifyVars: theme,
+                    },
+                  },
                 ]
               : [
                   'style-loader',
@@ -161,7 +171,13 @@ export default {
                       localIdentName: '[path][name]__[local]--[hash:base64:5]',
                     },
                   },
-                  'less-loader',
+                  {
+                    loader: 'less-loader',
+                    options: {
+                      javascriptEnabled: true,
+                      modifyVars: theme,
+                    },
+                  },
                 ],
           },
           {
@@ -174,9 +190,25 @@ export default {
                     options: { importLoaders: 2, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量2， less-loader + postcss-loader
                   },
                   'postcss-loader',
-                  'less-loader',
+                  {
+                    loader: 'less-loader',
+                    options: {
+                      javascriptEnabled: true,
+                      modifyVars: theme,
+                    },
+                  },
                 ]
-              : ['style-loader', 'css-loader', 'less-loader'],
+              : [
+                  'style-loader',
+                  'css-loader',
+                  {
+                    loader: 'less-loader',
+                    options: {
+                      javascriptEnabled: true,
+                      modifyVars: theme,
+                    },
+                  },
+                ],
           },
           {
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
