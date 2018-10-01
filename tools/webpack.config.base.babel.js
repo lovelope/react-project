@@ -4,14 +4,16 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 import paths, { PUBLIC_PATH } from './paths';
-// import pkg from './package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isVerbose = process.argv.includes('--verbose');
 
-// const reScript = /\.(js|jsx|mjs)$/;
-// const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
-// const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
+const REGEXP_SCRIPT = /\.(js|jsx|mjs)$/;
+const REGEXP_IMAGE = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
+const REGEXP_MODULE_CSS = /\.module\.css$/;
+const REGEXP_MODULE_LESS = /\.module\.less$/;
+const REGEXP_CSS = /\.css$/;
+const REGEXP_LESS = /\.less$/;
 
 const IS_USE_SOURCE_MAP = true;
 
@@ -50,7 +52,7 @@ export default {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|jsx)$/,
+        test: REGEXP_SCRIPT,
         include: paths.appSrc,
         exclude: /node_modules/,
         use: {
@@ -64,7 +66,7 @@ export default {
         // 只匹配第一个
         oneOf: [
           {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            test: REGEXP_IMAGE,
             loader: 'url-loader', // 图片
             options: {
               limit: 10000,
@@ -72,30 +74,98 @@ export default {
             },
           },
           {
-            test: /\.(js|jsx)$/,
+            test: REGEXP_SCRIPT,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: true, // 缓存
+                cacheDirectory: !isProd, // 缓存
               },
             },
           },
           {
-            test: /\.css$/,
+            test: REGEXP_MODULE_CSS,
             use: isProd
               ? [
                   MiniCssExtractPlugin.loader,
                   {
                     loader: 'css-loader',
-                    options: { importLoaders: 1, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量1，postcss-loader
+                    options: {
+                      modules: true,
+                      // 生产环境使用短类名
+                      localIdentName: '[local]--[hash:base64:8]',
+
+                      // 前置loader数量1，postcss-loader
+                      importLoaders: 1,
+                      sourceMap: IS_USE_SOURCE_MAP,
+                    },
+                  },
+                  'postcss-loader',
+                ]
+              : [
+                  'style-loader',
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                      // 开发环境使用详细类名
+                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    },
+                  },
+                ],
+          },
+          {
+            test: REGEXP_CSS,
+            use: isProd
+              ? [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      // 前置loader数量1，postcss-loader
+                      importLoaders: 1,
+                      sourceMap: IS_USE_SOURCE_MAP,
+                    },
                   },
                   'postcss-loader',
                 ]
               : ['style-loader', 'css-loader'],
           },
           {
-            test: /\.less$/,
+            test: REGEXP_MODULE_LESS,
+            use: isProd
+              ? [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                      // 生产环境使用短类名
+                      localIdentName: '[local]--[hash:base64:8]',
+
+                      // 前置loader数量2， less-loader + postcss-loader
+                      importLoaders: 2,
+                      sourceMap: IS_USE_SOURCE_MAP,
+                    },
+                  },
+                  'postcss-loader',
+                  'less-loader',
+                ]
+              : [
+                  'style-loader',
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                      // 开发环境使用详细类名
+                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    },
+                  },
+                  'less-loader',
+                ],
+          },
+          {
+            test: REGEXP_LESS,
             use: isProd
               ? [
                   MiniCssExtractPlugin.loader,
