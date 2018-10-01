@@ -8,7 +8,7 @@ module.exports = {
     '@babel/plugin-transform-runtime',
     [
       'import',
-      { libraryName: 'antd', libraryDirectory: 'es', style: 'css' },
+      { libraryName: 'antd', libraryDirectory: 'es', style: true },
       'antd',
     ], // 按需加载 `antd` 组件， `style: true` 会加载 less 文件
   ],
