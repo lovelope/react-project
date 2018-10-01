@@ -15,9 +15,7 @@
     "fix-js": "yarn run lint-js --fix",
     "fix-css": "yarn run lint-css --fix",
     "fix": "yarn run fix-js && yarn run fix-css",
-    "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'",
-    "precommit": "lint-staged",
-    "postcommit": "git update-index --again"
+    "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -102,5 +100,11 @@
     "last 4 versions",
     "Firefox ESR",
     "not ie < 9"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "post-commit": "git update-index --again",
+      "pre-commit": "lint-staged"
+    }
+  }
 }
