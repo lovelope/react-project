@@ -15,5 +15,13 @@ module.exports = {
 
   // presets 加载顺序，数组从后往前
   // 先执行 `react`， 然后执行 `env`
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  presets: [['@babel/preset-env', { modules: false }], '@babel/preset-react'],
+
+  // 覆盖规则，webpack 需要使用 commonjs 模块
+  overrides: [
+    {
+      test: ['./tools'],
+      presets: [['@babel/preset-env']],
+    },
+  ],
 };
