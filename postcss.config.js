@@ -2,11 +2,15 @@
 
 module.exports = ctx => ({
   parser: ctx.parser ? 'sugarss' : false,
-  map: ctx.env === 'development' ? ctx.map : false,
+  map: false,
   plugins: {
+    'postcss-flexbugs-fixes': {},
     'postcss-preset-env': {
+      autoprefixer: {
+        flexbox: 'no-2009',
+      },
       stage: 3,
     },
-    cssnano: ctx.env === 'production' ? {} : false,
+    cssnano: {},
   },
 });

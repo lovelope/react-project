@@ -42,7 +42,7 @@ export default {
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
-  devtool: isProd ? 'cheap-module-inline-source-map' : 'source-map',
+  devtool: isProd ? 'cheap-module-eval-source-map' : 'source-map',
 
   resolve: {
     alias: {
@@ -104,16 +104,23 @@ export default {
                       sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
-                  'postcss-loader',
+                  {
+                    loader: 'postcss-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                 ]
               : [
-                  'style-loader',
+                  {
+                    loader: 'style-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                   {
                     loader: 'css-loader',
                     options: {
                       modules: true,
                       // 开发环境使用详细类名
                       localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                 ],
@@ -131,9 +138,21 @@ export default {
                       sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
-                  'postcss-loader',
+                  {
+                    loader: 'postcss-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                 ]
-              : ['style-loader', 'css-loader'],
+              : [
+                  {
+                    loader: 'style-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
+                  {
+                    loader: 'css-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
+                ],
           },
           {
             test: REGEXP_MODULE_LESS,
@@ -152,23 +171,31 @@ export default {
                       sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
-                  'postcss-loader',
+                  {
+                    loader: 'postcss-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                   {
                     loader: 'less-loader',
                     options: {
                       javascriptEnabled: true,
                       modifyVars: theme,
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                 ]
               : [
-                  'style-loader',
+                  {
+                    loader: 'style-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                   {
                     loader: 'css-loader',
                     options: {
                       modules: true,
                       // 开发环境使用详细类名
                       localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                   {
@@ -176,6 +203,7 @@ export default {
                     options: {
                       javascriptEnabled: true,
                       modifyVars: theme,
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                 ],
@@ -187,25 +215,40 @@ export default {
                   MiniCssExtractPlugin.loader,
                   {
                     loader: 'css-loader',
-                    options: { importLoaders: 2, sourceMap: IS_USE_SOURCE_MAP }, // 前置loader数量2， less-loader + postcss-loader
+                    options: {
+                      // 前置loader数量2， less-loader + postcss-loader
+                      importLoaders: 2,
+                      sourceMap: IS_USE_SOURCE_MAP,
+                    },
                   },
-                  'postcss-loader',
+                  {
+                    loader: 'postcss-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                   {
                     loader: 'less-loader',
                     options: {
                       javascriptEnabled: true,
                       modifyVars: theme,
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                 ]
               : [
-                  'style-loader',
-                  'css-loader',
+                  {
+                    loader: 'style-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
+                  {
+                    loader: 'css-loader',
+                    options: { sourceMap: IS_USE_SOURCE_MAP },
+                  },
                   {
                     loader: 'less-loader',
                     options: {
                       javascriptEnabled: true,
                       modifyVars: theme,
+                      sourceMap: IS_USE_SOURCE_MAP,
                     },
                   },
                 ],
