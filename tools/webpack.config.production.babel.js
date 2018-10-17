@@ -6,7 +6,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import webpackConfigBase from './webpack.config.base.babel';
 import paths from './paths';
 
-const IS_USE_SOURCE_MAP = true;
+const OPEN_SOURCE_MAP = true;
 const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfigProd = {
@@ -18,13 +18,13 @@ const webpackConfigProd = {
     chunkFilename: 'js/[name].[hash:8].chunk.js', // 非入口代码分块文件名规则
     path: paths.appDist,
   },
-  devtool: IS_USE_SOURCE_MAP ? 'source-map' : false,
+  devtool: OPEN_SOURCE_MAP ? 'source-map' : false,
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: IS_USE_SOURCE_MAP,
+        sourceMap: OPEN_SOURCE_MAP,
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],

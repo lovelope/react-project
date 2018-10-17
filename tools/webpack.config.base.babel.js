@@ -1,10 +1,9 @@
 import webpack from 'webpack';
-
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
+import getStyleLoaders from './getStyleLoaders';
 
 // 覆盖 antd 主题
 const theme = getTheme(paths.appTheme);
@@ -19,7 +18,7 @@ const REGEXP_MODULE_LESS = /\.module\.less$/;
 const REGEXP_CSS = /\.css$/;
 const REGEXP_LESS = /\.less$/;
 
-const IS_USE_SOURCE_MAP = true;
+const OPEN_SOURCE_MAP = true;
 
 export default {
   context: paths.appRoot,
@@ -89,169 +88,39 @@ export default {
           },
           {
             test: REGEXP_MODULE_CSS,
-            use: isProd
-              ? [
-                  MiniCssExtractPlugin.loader,
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      modules: true,
-                      // 生产环境使用短类名
-                      localIdentName: '[local]--[hash:base64:8]',
-
-                      // 前置loader数量1，postcss-loader
-                      importLoaders: 1,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                  {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                ]
-              : [
-                  {
-                    loader: 'style-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      modules: true,
-                      // 开发环境使用详细类名
-                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                ],
+            use: getStyleLoaders({
+              isProd,
+              sourceMap: OPEN_SOURCE_MAP,
+              modules: true,
+            }),
           },
           {
             test: REGEXP_CSS,
-            use: isProd
-              ? [
-                  MiniCssExtractPlugin.loader,
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      // 前置loader数量1，postcss-loader
-                      importLoaders: 1,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                  {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                ]
-              : [
-                  {
-                    loader: 'style-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'css-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                ],
+            use: getStyleLoaders({
+              isProd,
+              sourceMap: OPEN_SOURCE_MAP,
+              modules: false,
+            }),
           },
           {
             test: REGEXP_MODULE_LESS,
-            use: isProd
-              ? [
-                  MiniCssExtractPlugin.loader,
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      modules: true,
-                      // 生产环境使用短类名
-                      localIdentName: '[local]--[hash:base64:8]',
-
-                      // 前置loader数量2， less-loader + postcss-loader
-                      importLoaders: 2,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                  {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'less-loader',
-                    options: {
-                      javascriptEnabled: true,
-                      modifyVars: theme,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                ]
-              : [
-                  {
-                    loader: 'style-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      modules: true,
-                      // 开发环境使用详细类名
-                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                  {
-                    loader: 'less-loader',
-                    options: {
-                      javascriptEnabled: true,
-                      modifyVars: theme,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                ],
+            use: getStyleLoaders({
+              isProd,
+              sourceMap: OPEN_SOURCE_MAP,
+              modules: true,
+              useLess: true,
+              modifyVars: theme,
+            }),
           },
           {
             test: REGEXP_LESS,
-            use: isProd
-              ? [
-                  MiniCssExtractPlugin.loader,
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      // 前置loader数量2， less-loader + postcss-loader
-                      importLoaders: 2,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                  {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'less-loader',
-                    options: {
-                      javascriptEnabled: true,
-                      modifyVars: theme,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                ]
-              : [
-                  {
-                    loader: 'style-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'css-loader',
-                    options: { sourceMap: IS_USE_SOURCE_MAP },
-                  },
-                  {
-                    loader: 'less-loader',
-                    options: {
-                      javascriptEnabled: true,
-                      modifyVars: theme,
-                      sourceMap: IS_USE_SOURCE_MAP,
-                    },
-                  },
-                ],
+            use: getStyleLoaders({
+              isProd,
+              sourceMap: OPEN_SOURCE_MAP,
+              modules: false,
+              useLess: true,
+              modifyVars: theme,
+            }),
           },
           {
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
