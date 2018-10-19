@@ -146,4 +146,21 @@ export default {
     tls: 'empty',
     child_process: 'empty',
   },
+
+  // 统计信息
+  stats: {
+    // 关闭 children 信息
+    children: false,
+
+    // 关闭构建模块信息
+    modules: false,
+
+    // 当文件大小超过 `performance.maxAssetSize` 时显示性能提示
+    performance: false,
+
+    // 关闭 less 文件顺序警告
+    warningsFilter: /mini-css-extract-plugin/,
+  },
+
+  performance: false,
 };
