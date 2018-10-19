@@ -24,6 +24,9 @@ export default function getStyleLoaders({
         // 生产环境使用短类名
         localIdentName: '[local]--[hash:base64:8]',
 
+        // 移除 css 注释
+        discardComments: { removeAll: true },
+
         // 前置loader数量1，postcss-loader
         importLoaders: useLess ? 2 : 1,
       },

@@ -14,7 +14,12 @@ const About = Loadable({
 });
 
 const Edit = Loadable({
-  loader: () => import(/* webpackChunkName: "About" */ '@/pages/Edit'),
+  loader: () => import(/* webpackChunkName: "Edit" */ '@/pages/Edit'),
+  loading: Loading,
+});
+
+const GoodsList = Loadable({
+  loader: () => import(/* webpackChunkName: "List" */ '@/pages/List/goodsList'),
   loading: Loading,
 });
 
@@ -33,5 +38,10 @@ export default [
     path: '/edit',
     name: 'Edit',
     component: Edit,
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: GoodsList,
   },
 ];
