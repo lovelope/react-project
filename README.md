@@ -26,3 +26,4 @@ npm run build
 - postcss
 - webpack@4
 - api proxy 支持环境切换
+- mobx
