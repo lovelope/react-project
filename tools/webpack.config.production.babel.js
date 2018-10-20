@@ -41,9 +41,6 @@ const webpackConfigProd = {
     },
   },
   plugins: [
-    // 清理旧文件
-    new CleanWebpackPlugin([paths.appDist], { root: paths.appRoot }),
-
     ...webpackConfigBase.plugins,
 
     new MiniCssExtractPlugin({
@@ -67,6 +64,9 @@ const webpackConfigProd = {
         minifyURLs: true,
       },
     }),
+
+    // 清理旧文件, plugins 顺序应该放在最后
+    new CleanWebpackPlugin([paths.appDist], { root: paths.appRoot }),
   ],
 };
 
