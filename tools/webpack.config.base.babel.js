@@ -29,6 +29,7 @@ export default {
 
   // 产出
   output: {
+    // 所有输出文件的目标路径，*必须是绝对路径*
     path: paths.appDist,
     publicPath: PUBLIC_PATH,
     pathinfo: isVerbose,
@@ -48,7 +49,7 @@ export default {
       '@': paths.appSrc,
     },
     extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules'],
+    modules: [paths.appNodeModules, paths.appSrc],
   },
 
   module: {
@@ -57,7 +58,7 @@ export default {
         enforce: 'pre',
         test: REGEXP_SCRIPT,
         include: paths.appSrc,
-        exclude: /node_modules/,
+        exclude: paths.appNodeModules,
         use: {
           loader: 'eslint-loader',
           options: {
@@ -71,6 +72,8 @@ export default {
           {
             test: REGEXP_IMAGE,
             loader: 'url-loader', // 图片
+            include: paths.appSrc,
+            exclude: paths.appNodeModules,
             options: {
               limit: 10000,
               name: 'img/[name].[hash:8].[ext]',
@@ -78,7 +81,8 @@ export default {
           },
           {
             test: REGEXP_SCRIPT,
-            exclude: /node_modules/,
+            include: paths.appSrc,
+            exclude: paths.appNodeModules,
             use: {
               loader: 'babel-loader',
               options: {
@@ -88,6 +92,8 @@ export default {
           },
           {
             test: REGEXP_MODULE_CSS,
+            include: paths.appSrc,
+            exclude: paths.appNodeModules,
             use: getStyleLoaders({
               isProd,
               sourceMap: OPEN_SOURCE_MAP,
@@ -96,6 +102,7 @@ export default {
           },
           {
             test: REGEXP_CSS,
+            include: [paths.appSrc, paths.appNodeModules],
             use: getStyleLoaders({
               isProd,
               sourceMap: OPEN_SOURCE_MAP,
@@ -104,6 +111,8 @@ export default {
           },
           {
             test: REGEXP_MODULE_LESS,
+            include: paths.appSrc,
+            exclude: paths.appNodeModules,
             use: getStyleLoaders({
               isProd,
               sourceMap: OPEN_SOURCE_MAP,
@@ -114,6 +123,7 @@ export default {
           },
           {
             test: REGEXP_LESS,
+            include: [paths.appSrc, paths.appNodeModules],
             use: getStyleLoaders({
               isProd,
               sourceMap: OPEN_SOURCE_MAP,
@@ -124,6 +134,7 @@ export default {
           },
           {
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            include: paths.appSrc,
             loader: 'file-loader', // 其它文件
             options: {
               name: 'other/[name].[hash:8].[ext]',
