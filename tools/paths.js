@@ -6,6 +6,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 export const PUBLIC_PATH = '/'; // publicPath
 
+// 绝对路径，加快文件检索速度
 const paths = {
   appRoot: appDirectory,
   appDist: resolveApp('dist'), // 构建产出文件夹
