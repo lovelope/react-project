@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
@@ -148,6 +149,9 @@ export default {
   plugins: [
     // 优化 moment 包大小，去除本地化内容
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    // 构建进度条
+    new ProgressBarPlugin(),
   ],
 
   node: {

@@ -27,3 +27,19 @@ npm run build
 - webpack@4
 - api proxy 支持环境切换
 - mobx
+- sourceMap 地址替换
+
+## 禁止用户访问 map 文件的 nginx 配置
+
+```nginx
+server {
+	# 禁止访问 txt、sh、map 文件
+	location ~* \.(txt|sh|map)$ {
+		deny all;
+	}
+}
+```
+
+## 注意
+
+- 确保替换 sourceMap 地址的脚本只执行一次
