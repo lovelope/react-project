@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import remarkHighlight from 'remark-highlight.js';
 
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
@@ -132,6 +133,18 @@ export default {
               useLess: true,
               modifyVars: theme,
             }),
+          },
+          {
+            test: /.mdx?$/,
+            use: [
+              'babel-loader',
+              {
+                loader: '@mdx-js/loader',
+                options: {
+                  mdPlugins: [remarkHighlight],
+                },
+              },
+            ],
           },
           {
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],

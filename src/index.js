@@ -6,8 +6,14 @@ import { Provider } from 'mobx-react';
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 
+import hljs from 'highlight.js/lib/highlight';
+import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/github.css';
+
 import App from '@/App';
 import Store from './store';
+
+hljs.registerLanguage('javascript', javascript);
 
 const store = new Store();
 
