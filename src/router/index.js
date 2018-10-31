@@ -23,6 +23,11 @@ const GoodsList = Loadable({
   loading: Loading,
 });
 
+const Demo = Loadable({
+  loader: () => import(/* webpackChunkName: "Demo" */ '@/pages/Demo'),
+  loading: Loading,
+});
+
 export default [
   {
     path: '/',
@@ -43,5 +48,10 @@ export default [
     path: '/list',
     name: 'List',
     component: GoodsList,
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: Demo,
   },
 ];
