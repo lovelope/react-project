@@ -12,7 +12,7 @@ class Home extends Component {
   }
 
   handleChange(date, dateString) {
-    console.info(date, dateString);
+    console.info(date, dateString, Object.assign({}, { a: 1 }, { b: false }));
     this.setState({ value: date });
   }
 
