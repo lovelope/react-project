@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import remarkHighlight from 'remark-highlight.js';
 
 import paths, { PUBLIC_PATH } from './paths';
@@ -165,6 +166,9 @@ export default {
 
     // 构建进度条
     new ProgressBarPlugin(),
+
+    // lodash 按需打包
+    new LodashModuleReplacementPlugin(),
   ],
 
   node: {
