@@ -6,8 +6,9 @@ module.exports = {
     ['@babel/plugin-proposal-class-properties', { loose: true }], // 支持 `handleChange = () => {}` 语法
     '@babel/plugin-syntax-dynamic-import', // 支持 `() => import('./Home')` 语法
     '@babel/plugin-transform-runtime',
+    'babel-plugin-lodash',
     [
-      'import',
+      'babel-plugin-import',
       { libraryName: 'antd', libraryDirectory: 'es', style: true },
       'antd',
     ], // 按需加载 `antd` 组件， `style: true` 会加载 less 文件

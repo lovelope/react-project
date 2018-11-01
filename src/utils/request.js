@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import qs from 'qs';
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 import { getToken, removeToken } from './helper';
 import { LOGIN_URL } from './urls';
 
