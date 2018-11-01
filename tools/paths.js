@@ -17,6 +17,9 @@ const paths = {
   appSrc: resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
   appTheme: resolveApp('src/theme.less'),
+  appDistDll: resolveApp('dist/dll'),
+  appDistDllJs: resolveApp('dist/dll/vendor.dll.js'),
+  appDistDllManifestJson: resolveApp('dist/dll/vendor.manifest.json'),
 };
 
 export default paths;
