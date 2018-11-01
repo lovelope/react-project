@@ -28,6 +28,7 @@ npm run build
 - api proxy 支持环境切换
 - mobx
 - sourceMap 地址替换
+- git commit msg 规范
 
 ## 禁止用户访问 map 文件的 nginx 配置
 
