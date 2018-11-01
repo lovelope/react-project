@@ -12,11 +12,10 @@
     "build": "cross-env NODE_ENV=production webpack --config tools/webpack.config.production.babel.js",
     "postbuild": "node tools/generatePrivateSourceMap.js",
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
-    "lint-css": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\"",
+    "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
     "lint": "yarn run lint-js && yarn run lint-css",
     "fix-js": "yarn run lint-js --fix",
-    "fix-css": "yarn run lint-css --fix",
-    "fix": "yarn run fix-js && yarn run fix-css",
+    "fix": "yarn run fix-js && yarn run lint-css",
     "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'"
   },
   "dependencies": {
@@ -109,8 +108,8 @@
         "prettier --write",
         "git add --force"
       ],
-      "*.{css,less,styl,scss,sass,sss}": [
-        "stylelint --fix",
+      "*.{less}": [
+        "stylelint --syntax less",
         "git add --force"
       ]
     }
