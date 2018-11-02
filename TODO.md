@@ -9,3 +9,4 @@
 - [x] 环境切换
 - [x] 生成私有 sourcemap
 - [x] webpack dll 支持（可以选择不打开）
+- [ ] 添加单元测试
