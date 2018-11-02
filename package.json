@@ -10,7 +10,6 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config tools/webpack.config.development.babel.js --color --progress",
     "build:dll": "cross-env NODE_ENV=production webpack --config tools/webpack.config.dll.babel.js",
     "build": "cross-env NODE_ENV=production webpack --config tools/webpack.config.production.babel.js",
-    "postbuild": "node tools/generatePrivateSourceMap.js",
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
     "lint": "yarn run lint-js && yarn run lint-css",

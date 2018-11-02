@@ -4,17 +4,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpackConfigBase from './webpack.config.base.babel';
 import paths, { PUBLIC_PATH } from './paths';
 import proxyConfigAll from './proxy.config';
+import getValueByEnv from './getValueByEnv';
 
 const HOST = process.env.HOST || v4.sync(); // 本机IP
 const PORT = process.env.PORT || 8080; // 端口号
 
-// 根据 npm start --[参数] 进行环境切换, 例如 `npm start --qa`
-let proxyCurrent = proxyConfigAll.dev; // 默认使用 dev 环境
-Object.keys(proxyConfigAll).forEach(envKey => {
-  if (process.env[`npm_config_${envKey}`]) {
-    proxyCurrent = { ...proxyCurrent, ...proxyConfigAll[envKey] };
-  }
-});
+const proxyCurrent = getValueByEnv(proxyConfigAll, { defaultEnv: 'dev' });
 
 const webpackConfigDev = {
   ...webpackConfigBase,
