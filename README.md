@@ -31,6 +31,10 @@ npm run build
 - git commit msg 规范
 - dll 支持
 
+## 配置切换的文件
+
+`tools/swtich.config.js`
+
 ## 禁止用户访问 map 文件的 nginx 配置
 
 ```nginx
