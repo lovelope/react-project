@@ -29,6 +29,11 @@ npm run build
 - mobx
 - sourceMap 地址替换
 - git commit msg 规范
+- dll 支持
+
+## 配置切换的文件
+
+`tools/swtich.config.js`
 
 ## 禁止用户访问 map 文件的 nginx 配置
 
@@ -41,6 +46,6 @@ server {
 }
 ```
 
-## 注意
+## TODO
 
-- 确保替换 sourceMap 地址的脚本只执行一次
+[TODO.md](./TODO.md)

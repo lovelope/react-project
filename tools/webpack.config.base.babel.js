@@ -1,7 +1,8 @@
 import webpack from 'webpack';
 import path from 'path';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
-import remarkHighlight from 'remark-highlight.js';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import rehypePrism from '@mapbox/rehype-prism';
 
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
@@ -141,7 +142,7 @@ export default {
               {
                 loader: '@mdx-js/loader',
                 options: {
-                  mdPlugins: [remarkHighlight],
+                  hastPlugins: [rehypePrism],
                 },
               },
             ],
@@ -165,6 +166,9 @@ export default {
 
     // 构建进度条
     new ProgressBarPlugin(),
+
+    // lodash 按需打包
+    new LodashModuleReplacementPlugin(),
   ],
 
   node: {

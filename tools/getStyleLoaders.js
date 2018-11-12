@@ -12,8 +12,13 @@ export default function getStyleLoaders({
   useLess = false, // 使用 less
   modifyVars = {}, // 修改 less 变量
 }) {
-  const prodLoaders = [
-    MiniCssExtractPlugin.loader,
+  return [
+    isProd
+      ? MiniCssExtractPlugin.loader
+      : {
+          loader: 'style-loader',
+          options: { sourceMap },
+        },
     {
       loader: 'css-loader',
       options: {
@@ -21,8 +26,10 @@ export default function getStyleLoaders({
 
         modules,
 
-        // 生产环境使用短类名
-        localIdentName: '[local]--[hash:base64:8]',
+        // 生产环境使用短类名，开发环境使用详细类名
+        localIdentName: isProd
+          ? '[local]--[hash:base64:8]'
+          : '[path][name]__[local]--[hash:base64:5]',
 
         // 移除 css 注释
         discardComments: { removeAll: true },
@@ -31,61 +38,18 @@ export default function getStyleLoaders({
         importLoaders: useLess ? 2 : 1,
       },
     },
-    {
+
+    isProd && {
       loader: 'postcss-loader',
       options: { sourceMap },
     },
-  ].concat(
-    !useLess
-      ? []
-      : [
-          {
-            loader: 'less-loader',
-            options: {
-              javascriptEnabled: true,
-              modifyVars,
-              sourceMap,
-            },
-          },
-        ]
-  );
-
-  const devLoaders = [
-    {
-      loader: 'style-loader',
-      options: { sourceMap },
-    },
-    {
-      loader: 'css-loader',
+    useLess && {
+      loader: 'less-loader',
       options: {
+        javascriptEnabled: true,
+        modifyVars,
         sourceMap,
-
-        modules,
-
-        // 开发环境使用详细类名
-        localIdentName: '[path][name]__[local]--[hash:base64:5]',
-
-        // 前置loader数量1，postcss-loader
-        importLoaders: useLess ? 1 : 0,
       },
     },
-  ].concat(
-    !useLess
-      ? []
-      : [
-          {
-            loader: 'less-loader',
-            options: {
-              javascriptEnabled: true,
-              modifyVars,
-              sourceMap,
-            },
-          },
-        ]
-  );
-
-  if (isProd) {
-    return prodLoaders;
-  }
-  return devLoaders;
+  ].filter(Boolean);
 }
