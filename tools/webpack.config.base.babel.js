@@ -45,7 +45,8 @@ export default {
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
-  devtool: isProd ? 'cheap-module-eval-source-map' : 'source-map',
+  // `cheap-module-eval-source-map` 速度快，适合开发环境
+  devtool: isProd ? false : 'cheap-module-eval-source-map',
 
   resolve: {
     alias: {
