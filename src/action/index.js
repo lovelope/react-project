@@ -1,6 +1,7 @@
-import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
-
+import { GOODS_LIST } from './type';
+/* eslint-disable import/prefer-default-export */
+// 模拟数据方法
 function generateSingleGoods() {
   const goodsName = Mock.Random.title();
   const data = Mock.mock({
@@ -22,25 +23,20 @@ function generateGoods(n = 10) {
   }
   return arr;
 }
-
-export default class Store {
-  constructor() {
-    this.getGoodsList();
-  }
-
-  @observable.ref
-  goodsList = [];
-
-  @computed
-  get total() {
-    return this.goodsList.length;
-  }
-
-  @action
-  async getGoodsList() {
-    const newGoodsList = await generateGoods();
-    runInAction(() => {
-      this.goodsList = [...this.goodsList, ...newGoodsList];
-    });
-  }
+//
+// 获取商品列表
+export function getGoodsList() {
+  return async dispatch => {
+    console.info('22222222');
+    try {
+      const res = await generateGoods();
+      console.info(res);
+      dispatch({
+        type: GOODS_LIST,
+        payload: [...res],
+      });
+    } catch (error) {
+      console.info(error);
+    }
+  };
 }

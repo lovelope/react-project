@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react';
+import { connect } from 'react-redux';
 import s from './goodsList.module.less';
 import GoodsItem from './goodsItem';
+import { getGoodsList } from '../../action';
 
-@inject('store')
-@observer
+@connect(
+  state => state.list,
+  { getGoodsList }
+)
 class GoodsList extends Component {
   static propTypes = {
-    store: PropTypes.shape({
-      goodsList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    }).isRequired,
+    getGoodsList: PropTypes.func,
+    goodsList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   };
 
+  static defaultProps = {
+    getGoodsList: () => {},
+  };
+
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.getGoodsList();
+    console.info(this.props);
+  }
+
   render() {
-    const {
-      store: { goodsList },
-    } = this.props;
+    const { goodsList } = this.props;
+    console.info('list:', this.props);
     return (
       <div className={s.goodsListContainer}>
         <ul className={s.goodsList}>
