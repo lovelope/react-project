@@ -1,7 +1,6 @@
+import * as Rx from 'rxjs';
 import Mock from 'mockjs';
-import { GOODS_LIST } from './type';
-/* eslint-disable import/prefer-default-export */
-// 模拟数据方法
+
 function generateSingleGoods() {
   const goodsName = Mock.Random.title();
   const data = Mock.mock({
@@ -23,20 +22,19 @@ function generateGoods(n = 10) {
   }
   return arr;
 }
-//
-// 获取商品列表
-export function getGoodsList() {
-  return async dispatch => {
-    console.info('22222222');
-    try {
-      const res = await generateGoods();
-      console.info(res);
-      dispatch({
-        type: GOODS_LIST,
-        payload: [...res],
-      });
-    } catch (error) {
-      console.info(error);
-    }
-  };
-}
+
+const jsonSubjects = {
+  goGetJSON: new Rx.Subject(),
+};
+const getGoods = () =>
+  Rx.Observable.create(cb => {
+    const res = generateGoods();
+    return cb.next(res);
+  });
+export default {
+  jsonSubjects,
+  getGoodsList: () =>
+    getGoods().subscribe(
+      jsonSubjects.goGetJSON.next.bind(jsonSubjects.goGetJSON)
+    ),
+};

@@ -1,28 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import s from './goodsList.module.less';
 import GoodsItem from './goodsItem';
-import { getGoodsList } from '../../action';
+import Intent from '../../intent/getList';
 
-@connect(
-  state => state.list,
-  { getGoodsList }
-)
 class GoodsList extends Component {
-  static propTypes = {
-    getGoodsList: PropTypes.func,
-    goodsList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  static defaultProps = {
-    getGoodsList: () => {},
-  };
-
-  componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.getGoodsList();
-    console.info(this.props);
+  componentWillMount() {
+    Intent.getGoodsList();
   }
 
   render() {
@@ -31,9 +20,10 @@ class GoodsList extends Component {
     return (
       <div className={s.goodsListContainer}>
         <ul className={s.goodsList}>
-          {goodsList.map(goodsItem => (
-            <GoodsItem key={goodsItem.id} {...goodsItem} />
-          ))}
+          {goodsList &&
+            goodsList.map(goodsItem => (
+              <GoodsItem key={goodsItem.id} {...goodsItem} />
+            ))}
         </ul>
       </div>
     );

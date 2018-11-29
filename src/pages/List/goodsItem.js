@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import s from './goodsItem.module.less';
+import Intent from '../../intent/getList';
 /* eslint-disable
 jsx-a11y/click-events-have-key-events,
 jsx-a11y/no-static-element-interactions,
 jsx-a11y/anchor-is-valid
 */
-import { getGoodsList } from '../../action';
 
 @withRouter
-@connect(
-  state => state.list,
-  {
-    getGoodsList,
-  }
-)
 class GoodsItem extends Component {
   static propTypes = {
     goodsName: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     goodsImgUrl: PropTypes.string.isRequired,
     history: PropTypes.shape({}).isRequired,
-    getGoodsList: PropTypes.func,
-  };
-
-  static defaultProps = {
-    getGoodsList: () => {},
   };
 
   handleClick = () => {
-    const { getGoodsList: getList } = this.props;
-    getList();
+    Intent.getGoodsList();
   };
 
   render() {

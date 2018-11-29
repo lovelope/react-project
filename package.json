@@ -23,6 +23,7 @@
     "antd": "^3.10.3",
     "highlight.js": "^9.13.1",
     "history": "^4.7.2",
+    "immutability-helper": "^2.8.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "mobx": "^4.5.2",
@@ -39,6 +40,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "remark-highlight.js": "^5.0.0",
+    "rxjs": "^6.3.3",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
@@ -111,7 +113,7 @@
         "git add --force"
       ],
       "*.{css,less,styl,scss,sass,sss}": [
-        "stylelint --fix",
+        "prettier --write",
         "git add --force"
       ]
     }

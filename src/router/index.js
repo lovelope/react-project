@@ -27,6 +27,10 @@ const Demo = Loadable({
   loader: () => import(/* webpackChunkName: "Demo" */ '@/pages/Demo'),
   loading: Loading,
 });
+const Count = Loadable({
+  loader: () => import(/* webpackChunkName: "Demo" */ '@/pages/Count'),
+  loading: Loading,
+});
 
 export default [
   {
@@ -53,5 +57,10 @@ export default [
     path: '/demo',
     name: 'Demo',
     component: Demo,
+  },
+  {
+    path: '/count',
+    name: 'Count',
+    component: Count,
   },
 ];
