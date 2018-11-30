@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { GOODS_LIST } from './type';
+
 /* eslint-disable import/prefer-default-export */
 // 模拟数据方法
 function generateSingleGoods() {
@@ -23,20 +23,4 @@ function generateGoods(n = 10) {
   }
   return arr;
 }
-//
-// 获取商品列表
-export function getGoodsList() {
-  return async dispatch => {
-    console.info('22222222');
-    try {
-      const res = await generateGoods();
-      console.info(res);
-      dispatch({
-        type: GOODS_LIST,
-        payload: [...res],
-      });
-    } catch (error) {
-      console.info(error);
-    }
-  };
-}
+export default generateGoods;

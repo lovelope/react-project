@@ -15,6 +15,7 @@ const initState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case GOODS_LIST: {
+      console.info(action);
       return {
         ...state,
         goodsList: action.payload,

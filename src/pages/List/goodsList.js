@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import s from './goodsList.module.less';
 import GoodsItem from './goodsItem';
-import { getGoodsList } from '../../action';
+import generateGoods from '../../action';
+import { GOODS_LIST } from '../../action/type';
+/* eslint-disable no-unused-expressions */
+const mapState = ({ list }) => ({
+  goodsList: list.goodsList,
+});
+const GoodsList = () => {
+  const { goodsList } = useMappedState(mapState);
 
-@connect(
-  state => state.list,
-  { getGoodsList }
-)
-class GoodsList extends Component {
-  static propTypes = {
-    getGoodsList: PropTypes.func,
-    goodsList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  };
-
-  static defaultProps = {
-    getGoodsList: () => {},
-  };
-
-  componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.getGoodsList();
-    console.info(this.props);
-  }
-
-  render() {
-    const { goodsList } = this.props;
-    console.info('list:', this.props);
-    return (
-      <div className={s.goodsListContainer}>
-        <ul className={s.goodsList}>
-          {goodsList.map(goodsItem => (
-            <GoodsItem key={goodsItem.id} {...goodsItem} />
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
-
+  const dispatch = useDispatch();
+  useEffect(
+    () => {
+      const res = generateGoods();
+      goodsList.length === 1 &&
+        dispatch({
+          type: GOODS_LIST,
+          payload: [...res],
+        });
+    },
+    [goodsList]
+  );
+  return (
+    <div className={s.goodsListContainer}>
+      <ul className={s.goodsList}>
+        {goodsList.map(goodsItem => (
+          <GoodsItem key={goodsItem.id} {...goodsItem} />
+        ))}
+      </ul>
+    </div>
+  );
+};
 export default GoodsList;
