@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -54,12 +54,49 @@ const webpackConfigProd = {
   devtool: false,
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
+      new TerserPlugin({
+        include: /\.min\.js$/,
         sourceMap: OPEN_SOURCE_MAP,
+        parallel: true,
+        cache: true,
+        terserOptions: {
+          ecma: undefined,
+          warnings: false,
+          parse: {},
+          compress: {
+            drop_debugger: true, // 删除 debugger
+            drop_console: true, // 删除 console
+          },
+          mangle: true,
+          module: false,
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: true,
+        },
       }),
-      new OptimizeCSSAssetsPlugin({}),
+      new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.css\.*(?!.*map)/g, // 注意不要写成 /\.css$/g
+        // eslint-disable-next-line global-require
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+          // 使用安全模式，避免 cssnano 重新计算 z-index
+          safe: true,
+
+          // 默认不移除许可证注释，这里移除所有
+          discardComments: { removeAll: true },
+
+          // cssnano 集成了autoprefixer的功能
+          // 会使用到autoprefixer进行无关前缀的清理
+          // 关闭autoprefixer功能
+          // 使用postcss的autoprefixer功能
+          autoprefixer: false,
+        },
+        canPrint: true,
+      }),
     ],
     splitChunks: {
       chunks: 'all',

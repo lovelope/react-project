@@ -31,9 +31,6 @@ export default function getStyleLoaders({
           ? '[local]--[hash:base64:8]'
           : '[path][name]__[local]--[hash:base64:5]',
 
-        // 移除 css 注释
-        discardComments: { removeAll: true },
-
         // 前置loader数量1，postcss-loader
         importLoaders: useLess ? 2 : 1,
       },
