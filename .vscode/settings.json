@@ -5,5 +5,25 @@
   // 路径映射智能提示
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src"
-  }
+  },
+
+  // 统一使用 unix 换行符
+  "files.eol": "\n",
+
+  // eslint 自动修复
+  "eslint.alwaysShowStatus": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "autoFix": true,
+      "language": "vue"
+    },
+    {
+      "autoFix": true,
+      "language": "html"
+    }
+  ],
+  "files.autoSave": "onFocusChange",
 }
