@@ -18,7 +18,7 @@ options 参数
   'referrerPolicy': '',
   'integrity': ''
 }; */
-export default function request(url, options) {
+export default async function request(url, options) {
   const defaultOptions = {
     method: 'POST',
     credentials: 'include',
@@ -27,7 +27,7 @@ export default function request(url, options) {
   // eslint-disable-next-line no-param-reassign
   options = merge(defaultOptions, options);
   /* eslint-disable no-use-before-define */
-  const config = new Promise(resolve => {
+  const config = await new Promise(resolve => {
     resolve({ url, options });
   })
     .then(processUrl)
