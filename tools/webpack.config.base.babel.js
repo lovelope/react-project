@@ -37,9 +37,9 @@ export default {
     publicPath: PUBLIC_PATH,
     pathinfo: isVerbose,
     // 入口文件名
-    filename: isProd ? 'js/[name].js' : 'js/[name].[hash:8].js',
+    filename: isProd ? 'js/[name].[hash:8].js' : 'js/[name].js',
     // 非入口代码分块文件名规则
-    chunkFilename: isProd ? 'js/[name].chunk.js' : '[name].[hash:8].chunk.js',
+    chunkFilename: isProd ? '[name].[hash:8].chunk.js' : 'js/[name].chunk.js',
     // 格式化 windows 上的文件路径
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
