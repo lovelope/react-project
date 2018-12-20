@@ -169,7 +169,9 @@ export default {
     new ProgressBarPlugin(),
 
     // lodash 按需打包
-    new LodashModuleReplacementPlugin(),
+    new LodashModuleReplacementPlugin({
+      paths: true, // 解决 `get` 取值报错的问题
+    }),
   ],
 
   node: {
