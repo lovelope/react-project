@@ -43,12 +43,6 @@ if (USE_DLL) {
 const webpackConfigProd = {
   ...webpackConfigBase,
   mode: 'production',
-  output: {
-    // 产出
-    filename: 'js/[name].[hash:8].bundle.js', // 入口文件名
-    chunkFilename: 'js/[name].[hash:8].chunk.js', // 非入口代码分块文件名规则
-    path: paths.appDist,
-  },
 
   // 使用 SourceMapDevToolPlugin 生成的 sourcemap
   devtool: false,
