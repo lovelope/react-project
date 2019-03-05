@@ -26,7 +26,7 @@ export default async function request(url, options) {
   };
   // eslint-disable-next-line no-param-reassign
   options = merge(defaultOptions, options);
-  /* eslint-disable no-use-before-define */
+  /* eslint-disable no-use-before-define, @typescript-eslint/no-use-before-define */
   const config = await new Promise(resolve => {
     resolve({ url, options });
   })

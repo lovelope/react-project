@@ -7,28 +7,30 @@ import rehypePrism from '@mapbox/rehype-prism';
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
 import getStyleLoaders from './getStyleLoaders';
+import switchConfig from './swtich.config';
 
+const { OPEN_SOURCE_MAP } = switchConfig;
 // 覆盖 antd 主题
 const theme = getTheme(paths.appTheme);
 
 const isProd = process.env.NODE_ENV === 'production';
 const isVerbose = process.argv.includes('--verbose');
 
-const REGEXP_SCRIPT = /\.(js|jsx|mjs)$/;
+const REGEXP_SCRIPT = /\.(ts|tsx|js|jsx|mjs)$/;
+// const REGEXP_JAVASCRIPT = /\.(js|jsx|mjs)$/;
+// const REGEXP_TYPESCRIPT = /\.(ts|tsx)$/;
 const REGEXP_IMAGE = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 const REGEXP_MODULE_CSS = /\.module\.css$/;
 const REGEXP_MODULE_LESS = /\.module\.less$/;
 const REGEXP_CSS = /\.css$/;
 const REGEXP_LESS = /\.less$/;
 
-const OPEN_SOURCE_MAP = true;
-
 export default {
   context: paths.appRoot,
 
   mode: isProd ? 'production' : 'development',
 
-  entry: ['@babel/polyfill', paths.appIndexJs], // 入口
+  entry: [paths.appIndexJs], // 入口
 
   // 产出
   output: {
@@ -47,14 +49,13 @@ export default {
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
-  // `cheap-module-eval-source-map` 速度快，适合开发环境
-  devtool: isProd ? false : 'cheap-module-eval-source-map',
+  devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
 
   resolve: {
     alias: {
       '@': paths.appSrc,
     },
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     modules: [paths.appNodeModules, paths.appSrc],
   },
 

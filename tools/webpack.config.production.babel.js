@@ -1,10 +1,12 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Terser from 'terser';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HtmlIncludeAssetsPlugin from 'html-webpack-include-assets-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpackConfigBase from './webpack.config.base.babel';
 import paths from './paths';
 import urls from './urls';
@@ -49,10 +51,9 @@ const webpackConfigProd = {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        include: /\.min\.js$/,
-        sourceMap: OPEN_SOURCE_MAP,
-        parallel: true,
         cache: true,
+        parallel: true,
+        sourceMap: OPEN_SOURCE_MAP,
         terserOptions: {
           ecma: undefined,
           warnings: false,
@@ -152,6 +153,24 @@ const webpackConfigProd = {
       root: paths.appRoot,
       exclude: USE_DLL ? ['dll'] : [],
     }),
+
+    // public 静态资源文件拷贝，针对 js 文件做压缩
+    new CopyWebpackPlugin([
+      {
+        from: paths.appPublic,
+        to: paths.appDist,
+        transform(content, filePath) {
+          if (/\.js$/.test(filePath)) {
+            // 将 Buffer(content) 转为 String(source)
+            const source = content.toString('utf8');
+            const { code } = Terser.minify(source);
+            return code;
+          }
+          return content;
+        },
+        ignore: 'index.html',
+      },
+    ]),
   ].filter(Boolean),
 };
 
