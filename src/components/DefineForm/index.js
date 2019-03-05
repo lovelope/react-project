@@ -12,7 +12,7 @@ const defaultFormItemLayout = {
 };
 
 // 渲染单个表单项
-const renderFormItem = ({ item, layout, getFieldDecorator }) => {
+const FormItemRender = ({ item, layout, getFieldDecorator }) => {
   const { label, key, required, component, options = {}, rules } = item;
   return (
     <FormItem key={key} label={label} {...layout}>
@@ -22,6 +22,12 @@ const renderFormItem = ({ item, layout, getFieldDecorator }) => {
       })(component || <Input />)}
     </FormItem>
   );
+};
+
+FormItemRender.propTypes = {
+  item: PropTypes.shape({}).isRequired,
+  layout: PropTypes.shape({}).isRequired,
+  getFieldDecorator: PropTypes.func.isRequired,
 };
 
 @Form.create()
@@ -55,7 +61,12 @@ class DefineForm extends Component {
 
     return (
       <Form>
-        {items.map(item => renderFormItem({ item, layout, getFieldDecorator }))}
+        {items.map(item => (
+          <FormItemRender
+            key={item.id}
+            {...{ item, layout, getFieldDecorator }}
+          />
+        ))}
       </Form>
     );
   }

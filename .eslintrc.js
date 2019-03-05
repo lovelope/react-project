@@ -3,9 +3,16 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier'],
-  parser: 'babel-eslint',
+  extends: [
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
+    'prettier/react',
+  ],
+  plugins: ['@typescript-eslint', 'prettier'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -21,11 +28,31 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json'],
       },
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
   },
   rules: {
-    // Recommend not to leave any console.log in your code
-    // Use console.error, console.warn and console.info instead
-    // https://eslint.org/docs/rules/no-console
+    quotes: [
+      'error',
+      'single',
+      { avoidEscape: true, allowTemplateLiterals: false },
+    ],
+    '@typescript-eslint/indent': ['error', 2],
+    '@typescript-eslint/camelcase': [
+      'error',
+      {
+        allow: [
+          '^UNSAFE_',
+          'child_process',
+          'drop_debugger',
+          'drop_console',
+          'keep_classnames',
+          'keep_fnames',
+        ],
+      },
+    ],
+
     'no-console': [
       'error',
       {
@@ -33,8 +60,6 @@ module.exports = {
       },
     ],
 
-    // Prefer destructuring from arrays and objects
-    // http://eslint.org/docs/rules/prefer-destructuring
     'prefer-destructuring': [
       'error',
       {
@@ -52,8 +77,6 @@ module.exports = {
       },
     ],
 
-    // Ensure <a> tags are valid
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
@@ -63,16 +86,10 @@ module.exports = {
       },
     ],
 
-    // Allow .js files to use JSX syntax
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
 
-    // Functional and class components are equivalent from React’s point of view
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
     'react/prefer-stateless-function': 'off',
 
-    // ESLint plugin for prettier formatting
-    // https://github.com/prettier/eslint-plugin-prettier
     'prettier/prettier': 'error',
   },
   settings: {

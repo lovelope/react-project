@@ -13,12 +13,14 @@ export default function getStyleLoaders({
   modifyVars = {}, // 修改 less 变量
 }) {
   return [
+    /* eslint-disable prettier/prettier */
     isProd
       ? MiniCssExtractPlugin.loader
       : {
-          loader: 'style-loader',
-          options: { sourceMap },
-        },
+        loader: 'style-loader',
+        options: { sourceMap },
+      },
+    /* eslint-enable prettier/prettier */
     {
       loader: 'css-loader',
       options: {

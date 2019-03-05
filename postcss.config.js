@@ -11,18 +11,6 @@ module.exports = ctx => ({
       },
       stage: 3,
     },
-    cssnano: {
-      preset: [
-        'advanced',
-        {
-          // 默认不移除许可证，这里移除所有
-          discardComments: { removeAll: true },
-          // 移除重复选择器或规则
-          discardDuplicates: true,
-          // 避免重新计算 zindex
-          zindex: false,
-        },
-      ],
-    },
+    cssnano: {},
   },
 });

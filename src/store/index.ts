@@ -1,7 +1,19 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
 
-function generateSingleGoods() {
+const delay = (ms: number) =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+
+interface Goods {
+  id: string;
+  goodsName: string;
+  price: number;
+  goodsImgUrl: string;
+}
+
+function generateSingleGoods(): Goods {
   const goodsName = Mock.Random.title();
   const data = Mock.mock({
     id: Mock.Random.guid(),
@@ -12,11 +24,12 @@ function generateSingleGoods() {
   return data;
 }
 
-function generateGoods(n = 10) {
+async function generateGoods(n = 10): Promise<Goods[]> {
+  await delay(1000);
   if (typeof n !== 'number' || n <= 0) {
     return [];
   }
-  const arr = [];
+  const arr: Goods[] = [];
   for (let i = 0; i < n; i += 1) {
     arr.push(generateSingleGoods());
   }
@@ -24,23 +37,24 @@ function generateGoods(n = 10) {
 }
 
 export default class Store {
-  constructor() {
+  public constructor() {
     this.getGoodsList();
   }
 
   @observable.ref
-  goodsList = [];
+  public goodsList: Goods[] = [];
 
   @computed
-  get total() {
+  public get total(): number {
     return this.goodsList.length;
   }
 
+  // 需要使用箭头函数方法，否则取不到 this
   @action
-  async getGoodsList() {
+  public getGoodsList = async () => {
     const newGoodsList = await generateGoods();
     runInAction(() => {
       this.goodsList = [...this.goodsList, ...newGoodsList];
     });
-  }
+  };
 }
