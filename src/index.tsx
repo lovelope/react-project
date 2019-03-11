@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 
 // 本地化
 import { LocaleProvider } from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+import zhCN from 'antd/es/locale-provider/zh_CN';
 
 // 语法高亮
 import 'prismjs/themes/prism.css';
@@ -22,3 +22,9 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+if (process.env.NODE_ENV === 'development') {
+  if (module.hot) {
+    module.hot.accept();
+  }
+}

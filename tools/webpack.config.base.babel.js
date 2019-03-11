@@ -17,8 +17,6 @@ const isProd = process.env.NODE_ENV === 'production';
 const isVerbose = process.argv.includes('--verbose');
 
 const REGEXP_SCRIPT = /\.(ts|tsx|js|jsx|mjs)$/;
-// const REGEXP_JAVASCRIPT = /\.(js|jsx|mjs)$/;
-// const REGEXP_TYPESCRIPT = /\.(ts|tsx)$/;
 const REGEXP_IMAGE = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 const REGEXP_MODULE_CSS = /\.module\.css$/;
 const REGEXP_MODULE_LESS = /\.module\.less$/;
@@ -30,7 +28,8 @@ export default {
 
   mode: isProd ? 'production' : 'development',
 
-  entry: [paths.appIndexJs], // 入口
+  // 入口
+  entry: [paths.appEntry],
 
   // 产出
   output: {

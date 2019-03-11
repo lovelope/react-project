@@ -149,9 +149,10 @@ const webpackConfigProd = {
     }),
 
     // 清理旧文件, plugins 顺序应该放在最后
-    new CleanWebpackPlugin([paths.appDist], {
-      root: paths.appRoot,
-      exclude: USE_DLL ? ['dll'] : [],
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['dist', USE_DLL && '!dll*'].filter(
+        Boolean
+      ),
     }),
 
     // public 静态资源文件拷贝，针对 js 文件做压缩
