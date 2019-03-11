@@ -7,9 +7,11 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
-    'plugin:import/typescript',
+    // eslint-plugin-import@2.16.0 尚未支持`@typescript-eslint`
+    // 'plugin:import/typescript',
     'prettier',
     'prettier/react',
+    'prettier/@typescript-eslint',
   ],
   plugins: ['@typescript-eslint', 'prettier'],
   parser: '@typescript-eslint/parser',
@@ -20,16 +22,14 @@ module.exports = {
       impliedStrict: true, // 全局严格模式
       jsx: true,
     },
+    project: 'tsconfig.json',
   },
   settings: {
     'import/resolver': {
       alias: {
         map: [['@', './src']],
-        extensions: ['.js', '.jsx', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
       },
-    },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
   },
   rules: {
@@ -38,7 +38,10 @@ module.exports = {
       'single',
       { avoidEscape: true, allowTemplateLiterals: false },
     ],
-    '@typescript-eslint/indent': ['error', 2],
+
+    // indent: 'off',
+    // '@typescript-eslint/indent': ['error', 2],
+
     '@typescript-eslint/camelcase': [
       'error',
       {
@@ -86,9 +89,15 @@ module.exports = {
       },
     ],
 
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
 
     'react/prefer-stateless-function': 'off',
+
+    // 使用 TS 无需使用 prop-types
+    'react/prop-types': 'off',
 
     'prettier/prettier': 'error',
   },

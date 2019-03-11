@@ -17,7 +17,7 @@ module.exports = {
   // 先执行 `react`， 然后执行 `env`
   presets: [
     ['@babel/preset-env', { modules: false, useBuiltIns: 'usage' }],
-    '@babel/typescript',
+    '@babel/preset-typescript',
     '@babel/preset-react',
   ],
 

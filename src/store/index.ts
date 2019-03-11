@@ -1,7 +1,7 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
 
-const delay = (ms: number) =>
+const delay = (ms: number): Promise<undefined> =>
   new Promise(resolve => {
     setTimeout(resolve, ms);
   });

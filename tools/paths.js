@@ -4,6 +4,20 @@ import path from 'path';
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
+// 查找入口文件，可能是 ts 也可能是 js
+const resolveModule = (resolveFn, filePath) => {
+  const moduleFileExtensions = ['js', 'jsx', 'ts', 'tsx'];
+  const extension = moduleFileExtensions.find(ext =>
+    fs.existsSync(resolveFn(`${filePath}.${ext}`))
+  );
+
+  if (extension) {
+    return resolveFn(`${filePath}.${extension}`);
+  }
+
+  return resolveFn(`${filePath}.js`);
+};
+
 export const PUBLIC_PATH = '/'; // publicPath
 
 // 绝对路径，加快文件检索速度
@@ -12,7 +26,7 @@ const paths = {
   appDist: resolveApp('dist'), // 构建产出文件夹
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.tsx'),
+  appEntry: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
