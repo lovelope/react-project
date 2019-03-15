@@ -18,11 +18,11 @@
     "javascriptreact",
     {
       "autoFix": true,
-      "language": "vue"
+      "language": "typescript"
     },
     {
       "autoFix": true,
-      "language": "html"
+      "language": "typescriptreact"
     }
   ],
   "files.autoSave": "onFocusChange",
