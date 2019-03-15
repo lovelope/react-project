@@ -1,9 +1,10 @@
-import { lazy } from 'react';
+import { lazy, LazyExoticComponent, ComponentType } from 'react';
 
-interface RouteItem {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface RouteItem<T extends ComponentType<any> = any> {
   path: string;
   name: string;
-  component: React.ComponentType;
+  component: LazyExoticComponent<T>;
 }
 
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ '@/pages/Home'));
