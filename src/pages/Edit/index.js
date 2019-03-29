@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Button } from 'antd';
 import DefineForm, { defaultLabelColSpan } from '@/components/DefineForm';
-import autobind from '@/utils/autobind';
+
 // formItems即为表单的配置项
 import formItems from './customFormItems';
 
@@ -30,18 +30,16 @@ class Edit extends Component {
     this.formRef = null;
   }
 
-  @autobind
-  handleGetDetail() {
+  handleGetDetail = () => {
     requestDetail().then(res => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
       res.RangePicker = res.RangePicker.map(d => moment(d));
       this.formRef.setFieldsValue(res);
     });
-  }
+  };
 
-  @autobind
-  handleSubmit() {
+  handleSubmit = () => {
     this.formRef.validateFieldsAndScroll((err, values) => {
       console.info(values);
       if (err) {
@@ -49,7 +47,7 @@ class Edit extends Component {
       }
       console.info('校验通过');
     });
-  }
+  };
 
   render() {
     return (
