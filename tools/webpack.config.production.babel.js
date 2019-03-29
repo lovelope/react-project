@@ -150,8 +150,9 @@ const webpackConfigProd = {
 
     // 清理旧文件, plugins 顺序应该放在最后
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['dist', USE_DLL && '!dll*'].filter(
-        Boolean
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: ['**/*'].concat(
+        USE_DLL ? ['!dll', '!dll/**/*'] : []
       ),
     }),
 
