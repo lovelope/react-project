@@ -1,4 +1,17 @@
-# React Project
+# [React Project](https://github.com/lovelope/react-project)
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-airbnb-brightgreen.svg)](https://github.com/airbnb/javascript)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![npm (tag)](https://img.shields.io/npm/v/stylelint/latest.svg?label=stylelint)
+![David](https://img.shields.io/david/lovelope/react-project.svg)
+![npm (tag)](https://img.shields.io/npm/v/antd/latest.svg?label=antd)
+![npm (tag)](https://img.shields.io/npm/v/mobx/mobx4.svg?label=mobx%40mobx4)
+![npm (tag)](https://img.shields.io/npm/v/webpack/latest.svg?label=webpack)
+![npm (tag)](https://img.shields.io/npm/v/@babel/preset-env/latest.svg?label=%40babel%2Fpreset-env)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/lovelope/react-project/feature/ts.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/lovelope/react-project.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/lovelope/react-project/pulls)
 
 ---
 
