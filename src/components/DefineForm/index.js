@@ -63,7 +63,7 @@ class DefineForm extends Component {
       <Form>
         {items.map(item => (
           <FormItemRender
-            key={item.id}
+            key={item.key}
             {...{ item, layout, getFieldDecorator }}
           />
         ))}
