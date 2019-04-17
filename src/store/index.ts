@@ -2,9 +2,11 @@ import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
 
 const delay = (ms: number): Promise<undefined> =>
-  new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
+  new Promise(
+    (resolve): void => {
+      setTimeout(resolve, ms);
+    }
+  );
 
 interface Goods {
   id: string;
@@ -51,10 +53,12 @@ export default class Store {
 
   // 需要使用箭头函数方法，否则取不到 this
   @action
-  public getGoodsList = async () => {
+  public getGoodsList = async (): Promise<void> => {
     const newGoodsList = await generateGoods();
-    runInAction(() => {
-      this.goodsList = [...this.goodsList, ...newGoodsList];
-    });
+    runInAction(
+      (): void => {
+        this.goodsList = [...this.goodsList, ...newGoodsList];
+      }
+    );
   };
 }

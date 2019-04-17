@@ -7,8 +7,7 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
-    // eslint-plugin-import@2.16.0 尚未支持`@typescript-eslint`
-    // 'plugin:import/typescript',
+    'plugin:import/typescript',
     'prettier',
     'prettier/react',
     'prettier/@typescript-eslint',

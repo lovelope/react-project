@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { lazy, LazyExoticComponent, ComponentType } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
