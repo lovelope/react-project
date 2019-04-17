@@ -5,11 +5,11 @@ const HooksDemo: React.FC = (): React.ReactElement => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpen(true)}>OPEN</Button>
+      <Button onClick={(): void => setOpen(true)}>OPEN</Button>
       <Modal
         visible={open}
-        onOk={() => setOpen(false)}
-        onCancel={() => setOpen(false)}
+        onOk={(): void => setOpen(false)}
+        onCancel={(): void => setOpen(false)}
       />
     </>
   );

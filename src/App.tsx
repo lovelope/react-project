@@ -15,14 +15,16 @@ export default class App extends Component {
       <Router history={historyInstance}>
         <Suspense fallback={<Loading />}>
           <Switch>
-            {routes.map(({ path, component: ComponentItem }) => (
-              <Route
-                exact
-                key={path}
-                path={path}
-                render={() => <ComponentItem />}
-              />
-            ))}
+            {routes.map(
+              ({ path, component: ComponentItem }): React.ReactNode => (
+                <Route
+                  exact
+                  key={path}
+                  path={path}
+                  render={(): React.ReactNode => <ComponentItem />}
+                />
+              )
+            )}
           </Switch>
         </Suspense>
       </Router>

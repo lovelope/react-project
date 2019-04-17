@@ -5,7 +5,7 @@ const Counter = function Counter(): React.ReactElement {
   return (
     <div>
       <p>{count}</p>
-      <button type="button" onClick={() => setCount(count + 1)}>
+      <button type="button" onClick={(): void => setCount(count + 1)}>
         add count
       </button>
     </div>
