@@ -4,19 +4,7 @@ import paths from './paths';
 export default {
   mode: 'production',
   entry: {
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'mobx',
-      'mobx-react',
-      'moment',
-      'moment/locale/zh-cn',
-      'classnames',
-      'antd',
-      '@ant-design/icons',
-      'mockjs',
-    ],
+    vendor: ['react', 'react-dom', 'react-router', 'mobx', 'mobx-react'],
   },
   output: {
     path: paths.appDistDll,
