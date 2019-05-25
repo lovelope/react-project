@@ -2,23 +2,68 @@
   "name": "react-starter",
   "version": "1.1.0",
   "description": "A starter for react project.",
-  "main": "index.js",
-  "author": "lovelope <lovelope@qq.com>",
   "repository": {
     "type": "git",
     "url": "git@github.com:lovelope/react-project.git"
   },
   "license": "MIT",
+  "author": "lovelope <lovelope@qq.com>",
+  "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config tools/webpack.config.development.babel.js --color --progress",
-    "build:dll": "cross-env NODE_ENV=production webpack --config tools/webpack.config.dll.babel.js",
     "build": "cross-env NODE_ENV=production webpack --config tools/webpack.config.production.babel.js",
-    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . --ext .js,.jsx,.ts,.tsx",
-    "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
-    "lint": "npm run lint-js && npm run lint-css",
-    "fix-js": "npm run lint-js --fix",
+    "build:dll": "cross-env NODE_ENV=production webpack --config tools/webpack.config.dll.babel.js",
     "fix": "npm run fix-js && npm run lint-css",
-    "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'"
+    "fix-js": "npm run lint-js --fix",
+    "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'",
+    "lint": "npm run lint-js && npm run lint-css",
+    "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
+    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . --ext .js,.jsx,.ts,.tsx",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config tools/webpack.config.development.babel.js --color --progress"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "ignore": [
+      "package.json"
+    ],
+    "linters": {
+      "*.{js,jsx,ts,tsx}": [
+        "eslint --no-ignore --fix",
+        "git add --force"
+      ],
+      "*.{json,md,graphql}": [
+        "prettier --write",
+        "git add --force"
+      ],
+      "*.{css,less}": [
+        "stylelint --syntax less",
+        "git add --force"
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      "last 2 Chrome versions",
+      "Safari >= 9",
+      "Firefox ESR",
+      "Edge >= 12",
+      "IE >= 11"
+    ],
+    "development": [
+      "last 1 Chrome version",
+      "Edge 17",
+      "IE 11"
+    ]
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
@@ -105,45 +150,5 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.3.1"
-  },
-  "lint-staged": {
-    "ignore": [
-      "package.json"
-    ],
-    "linters": {
-      "*.{js,jsx,ts,tsx}": [
-        "eslint --no-ignore --fix",
-        "git add --force"
-      ],
-      "*.{json,md,graphql}": [
-        "prettier --write",
-        "git add --force"
-      ],
-      "*.{css,less}": [
-        "stylelint --syntax less",
-        "git add --force"
-      ]
-    }
-  },
-  "browserslist": {
-    "production": [
-      "last 2 Chrome versions",
-      "Safari >= 9",
-      "Firefox ESR",
-      "Edge >= 12",
-      "IE >= 11"
-    ],
-    "development": [
-      "last 1 Chrome version",
-      "Edge 17",
-      "IE 11"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "post-commit": "git update-index --again"
-    }
   }
 }
