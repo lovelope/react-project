@@ -1,6 +1,6 @@
 export default {
   // 是否使用 dll
-  USE_DLL: false,
+  USE_DLL: true,
 
   // 是否使用 sourcemap
   OPEN_SOURCE_MAP: true,
