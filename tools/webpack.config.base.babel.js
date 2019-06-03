@@ -1,13 +1,19 @@
-import webpack from 'webpack';
 import path from 'path';
+import os from 'os';
+
+import webpack from 'webpack';
+import HappyPack from 'happypack';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
-import rehypePrism from '@mapbox/rehype-prism';
+import mdHighlightPlugin from '@mapbox/rehype-prism';
 
 import paths, { PUBLIC_PATH } from './paths';
 import getTheme from './theme';
 import getStyleLoaders from './getStyleLoaders';
 import switchConfig from './swtich.config';
+
+// 构造出共享进程池，进程池中包含cpu+1个子进程
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length + 1 });
 
 const { OPEN_SOURCE_MAP } = switchConfig;
 // 覆盖 antd 主题
@@ -65,36 +71,30 @@ export default {
         test: REGEXP_SCRIPT,
         include: paths.appSrc,
         exclude: paths.appNodeModules,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            cache: true, // 缓存lint结果，可以减少lint时间
-          },
-        },
+        use: ['happypack/loader?id=eslint'],
       },
       {
         // 只匹配第一个
         oneOf: [
           {
-            test: REGEXP_IMAGE,
-            loader: 'url-loader', // 图片
+            test: REGEXP_IMAGE, // 图片
             include: paths.appSrc,
             exclude: paths.appNodeModules,
-            options: {
-              limit: 10000,
-              name: 'img/[name].[hash:8].[ext]',
-            },
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'img/[name].[hash:8].[ext]',
+                },
+              },
+            ],
           },
           {
             test: REGEXP_SCRIPT,
             include: paths.appSrc,
             exclude: paths.appNodeModules,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: !isProd, // 缓存
-              },
-            },
+            use: ['happypack/loader?id=babel'],
           },
           {
             test: REGEXP_MODULE_CSS,
@@ -145,7 +145,7 @@ export default {
               {
                 loader: '@mdx-js/loader',
                 options: {
-                  hastPlugins: [rehypePrism],
+                  rehypePlugins: [mdHighlightPlugin],
                 },
               },
             ],
@@ -173,6 +173,34 @@ export default {
     // lodash 按需打包
     new LodashModuleReplacementPlugin({
       paths: true, // 解决 `get` 取值报错的问题
+    }),
+
+    new HappyPack({
+      id: 'eslint',
+      // 使用共享进程池中的子进程去处理任务
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: 'eslint-loader',
+          options: {
+            cache: true, // 缓存lint结果，可以减少lint时间
+          },
+        },
+      ],
+    }),
+
+    new HappyPack({
+      id: 'babel',
+      // 使用共享进程池中的子进程去处理任务
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: !isProd, // 缓存
+          },
+        },
+      ],
     }),
   ],
 

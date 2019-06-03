@@ -16,7 +16,7 @@ interface Goods {
 }
 
 function generateSingleGoods(): Goods {
-  const goodsName = Mock.Random.title();
+  const goodsName = Mock.Random.ctitle();
   const data = Mock.mock({
     id: Mock.Random.guid(),
     goodsName,

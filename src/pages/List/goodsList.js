@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
-import { Button } from 'antd';
+import { Button, Table } from 'antd';
 import s from './goodsList.module.less';
-import GoodsItem from './goodsItem';
+// import GoodsItem from './goodsItem';
+import { getColumns } from './const';
 
 @inject('store')
 @observer
@@ -33,13 +34,13 @@ class GoodsList extends Component {
     const {
       store: { goodsList },
     } = this.props;
+
+    const columns = getColumns({
+      renderImg: text => <img src={text} alt="" />,
+    });
     return (
       <div className={s.goodsListContainer}>
-        <ul className={s.goodsList}>
-          {goodsList.map(goodsItem => (
-            <GoodsItem key={goodsItem.id} {...goodsItem} />
-          ))}
-        </ul>
+        <Table columns={columns} dataSource={goodsList} rowKey="id" />
 
         <Button
           type="primary"
