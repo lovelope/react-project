@@ -1,5 +1,6 @@
 # [React Project](https://github.com/lovelope/react-project)
 
+[![Build Status](https://api.travis-ci.org/lovelope/react-project.svg?branch=feature%2Fts)](https://travis-ci.org/lovelope/react-project)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-airbnb-brightgreen.svg)](https://github.com/airbnb/javascript)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
