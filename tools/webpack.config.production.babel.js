@@ -4,8 +4,8 @@ import Terser from 'terser';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-import HtmlIncludeAssetsPlugin from 'html-webpack-include-assets-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpackConfigBase from './webpack.config.base.babel';
 import paths from './paths';
@@ -136,8 +136,8 @@ const webpackConfigProd = {
       }),
 
     USE_DLL &&
-      new HtmlIncludeAssetsPlugin({
-        assets: ['dll/vendor.dll.js'], //  添加的资源相对html的路径
+      new HtmlWebpackTagsPlugin({
+        tags: ['dll/vendor.dll.js'], //  添加的资源相对html的路径
         append: false, // false 在其他资源的之前添加 true 在其他资源之后添加
       }),
 
