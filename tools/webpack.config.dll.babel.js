@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import paths from './paths';
+import paths from './paths.js';
 
 export default {
   mode: 'production',

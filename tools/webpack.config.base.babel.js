@@ -7,10 +7,10 @@ import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import mdHighlightPlugin from '@mapbox/rehype-prism';
 
-import paths, { PUBLIC_PATH } from './paths';
-import getTheme from './theme';
-import getStyleLoaders from './getStyleLoaders';
-import switchConfig from './swtich.config';
+import paths, { PUBLIC_PATH } from './paths.js';
+import getTheme from './theme.js';
+import getStyleLoaders from './getStyleLoaders.js';
+import switchConfig from './swtich.config.js';
 
 // 构造出共享进程池，进程池中包含cpu+1个子进程
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length + 1 });

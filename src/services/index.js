@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '@/utils/request.ts';
 
 export function getGoodsList({ page }) {
   return request('/api/goods/list', { body: { page } });
