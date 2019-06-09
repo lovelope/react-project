@@ -2,10 +2,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import qs from 'qs';
 import { merge } from 'lodash';
-// import { supplierNavigator, marketNavigator } from './navigator';
-import { getToken } from './helper';
-import { LOGOUT_URL } from './urls';
-import { AUTH_ERROR_CODE } from './code';
+
+// @ts-ignore
+import { getToken } from './helper.ts';
+// @ts-ignore
+import { LOGOUT_URL } from './urls.ts';
+// @ts-ignore
+import { AUTH_ERROR_CODE } from './code.ts';
 
 const { toString } = Object.prototype;
 
@@ -245,6 +248,7 @@ function addContentType(options: TresquestInterceptorOptions) {
   if (!headers) {
     // eslint-disable-next-line no-param-reassign
     options.headers = {};
+    // eslint-disable-next-line prefer-destructuring
     headers = options.headers;
   }
   if (!headers['Content-Type']) {

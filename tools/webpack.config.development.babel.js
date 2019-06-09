@@ -1,9 +1,9 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpackConfigBase from './webpack.config.base.babel';
-import paths, { PUBLIC_PATH } from './paths';
-import proxyConfigAll from './proxy.config';
-import getValueByEnv from './getValueByEnv';
+import webpackConfigBase from './webpack.config.base.babel.js';
+import paths, { PUBLIC_PATH } from './paths.js';
+import proxyConfigAll from './proxy.config.js';
+import getValueByEnv from './getValueByEnv.js';
 
 const HOST = process.env.HOST || '0.0.0.0'; // 本机IP
 const PORT = process.env.PORT || 8080; // 端口号

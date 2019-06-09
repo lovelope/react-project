@@ -7,11 +7,11 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import webpackConfigBase from './webpack.config.base.babel';
-import paths from './paths';
-import urls from './urls';
-import getValueByEnv from './getValueByEnv';
-import switchConfig from './swtich.config';
+import webpackConfigBase from './webpack.config.base.babel.js';
+import paths from './paths.js';
+import urls from './urls.js';
+import getValueByEnv from './getValueByEnv.js';
+import switchConfig from './swtich.config.js';
 
 const {
   USE_DLL,

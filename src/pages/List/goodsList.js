@@ -5,7 +5,7 @@ import { observable } from 'mobx';
 import { Button, Table } from 'antd';
 import s from './goodsList.module.less';
 // import GoodsItem from './goodsItem';
-import { getColumns } from './const';
+import { getColumns } from './const.ts';
 
 @inject('store')
 @observer

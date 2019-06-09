@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { ColumnProps } from 'antd/es/table';
+import { ColumnProps } from 'antd/es/table/index.js';
 
 interface GoodsType {
   id: string;

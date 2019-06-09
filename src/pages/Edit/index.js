@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Button } from 'antd';
-import DefineForm, { defaultLabelColSpan } from '@/components/DefineForm';
+import DefineForm, {
+  defaultLabelColSpan,
+} from '@/components/DefineForm/index.js';
 
 // formItems即为表单的配置项
-import formItems from './customFormItems';
+import formItems from './customFormItems.js';
 
 // 模拟发请求（在做修改操作时，表单需要先填充已有数据，这里写了个假的获取详情接口）
 const requestDetail = () =>
