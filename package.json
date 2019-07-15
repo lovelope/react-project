@@ -71,7 +71,7 @@
     "core-js": "^2.6.9",
     "history": "^4.9.0",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "mobx": "^4.10.0",
     "mobx-react": "^6.0.3",
     "mockjs": "^1.0.1-beta3",
