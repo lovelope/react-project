@@ -47,7 +47,7 @@ npm run build
 
 ## 配置切换的文件
 
-`tools/swtich.config.js`
+`tools/switch.config.js`
 
 ## TODO
 

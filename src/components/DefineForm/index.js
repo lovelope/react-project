@@ -25,7 +25,14 @@ const FormItemRender = ({ item, layout, getFieldDecorator }) => {
 };
 
 FormItemRender.propTypes = {
-  item: PropTypes.shape({}).isRequired,
+  item: PropTypes.shape({
+    key: PropTypes.oneOfType([PropTypes.string, PropTypes.symbol]),
+    label: PropTypes.string,
+    required: PropTypes.bool,
+    component: PropTypes.element,
+    options: PropTypes.shape({}),
+    rules: PropTypes.arrayOf(PropTypes.shape({})),
+  }).isRequired,
   layout: PropTypes.shape({}).isRequired,
   getFieldDecorator: PropTypes.func.isRequired,
 };
@@ -44,7 +51,9 @@ class DefineForm extends Component {
       })
     ).isRequired,
     layout: PropTypes.shape({}),
-    form: PropTypes.shape({}).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {

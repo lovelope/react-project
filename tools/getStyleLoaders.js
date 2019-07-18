@@ -3,7 +3,13 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
  * 获取 cssLoaders
- * @param {*} param0
+ * @param {object} options 配置
+ * @param {boolean} options.isProd 是否为生产环境
+ * @param {boolean} options.sourceMap 是否开启sourceMap
+ * @param {boolean} options.modules 是否开启css modules
+ * @param {boolean} options.useLess 是否使用 less
+ * @param {object} options.modifyVars 覆盖 less 变量
+ * @returns {object[]} loader数组
  */
 export default function getStyleLoaders({
   isProd = true, // 生产环境
@@ -13,25 +19,26 @@ export default function getStyleLoaders({
   modifyVars = {}, // 修改 less 变量
 }) {
   return [
-    /* eslint-disable prettier/prettier */
     isProd
       ? MiniCssExtractPlugin.loader
       : {
-        loader: 'style-loader',
-        options: { sourceMap },
-      },
-    /* eslint-enable prettier/prettier */
+          loader: 'style-loader',
+          options: { sourceMap },
+        },
+
     {
       loader: 'css-loader',
       options: {
         sourceMap,
 
-        modules,
-
-        // 生产环境使用短类名，开发环境使用详细类名
-        localIdentName: isProd
-          ? '[local]--[hash:base64:8]'
-          : '[path][name]__[local]--[hash:base64:5]',
+        modules: modules
+          ? {
+              // 生产环境使用短类名，开发环境使用详细类名
+              localIdentName: isProd
+                ? '[local]--[hash:base64:8]'
+                : '[path][name]__[local]--[hash:base64:5]',
+            }
+          : false,
 
         // 前置loader数量1，postcss-loader
         importLoaders: useLess ? 2 : 1,
