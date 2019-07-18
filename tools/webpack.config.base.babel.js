@@ -10,7 +10,7 @@ import mdHighlightPlugin from '@mapbox/rehype-prism';
 import paths, { PUBLIC_PATH } from './paths.js';
 import getTheme from './theme.js';
 import getStyleLoaders from './getStyleLoaders.js';
-import switchConfig from './swtich.config.js';
+import switchConfig from './switch.config.js';
 
 // 构造出共享进程池，进程池中包含cpu+1个子进程
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length + 1 });

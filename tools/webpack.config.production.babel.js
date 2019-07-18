@@ -11,7 +11,7 @@ import webpackConfigBase from './webpack.config.base.babel.js';
 import paths from './paths.js';
 import urls from './urls.js';
 import getValueByEnv from './getValueByEnv.js';
-import switchConfig from './swtich.config.js';
+import switchConfig from './switch.config.js';
 
 const {
   USE_DLL,

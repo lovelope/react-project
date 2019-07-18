@@ -1,12 +1,14 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
 
-const delay = (ms: number): Promise<undefined> =>
+/* eslint-disable prettier/prettier */
+const delay = (ms: number): Promise<void> =>
   new Promise(
     (resolve): void => {
       setTimeout(resolve, ms);
     }
   );
+/* eslint-enable prettier/prettier */
 
 interface Goods {
   id: string;
@@ -55,10 +57,8 @@ export default class Store {
   @action
   public getGoodsList = async (): Promise<void> => {
     const newGoodsList = await generateGoods();
-    runInAction(
-      (): void => {
-        this.goodsList = [...this.goodsList, ...newGoodsList];
-      }
-    );
+    runInAction(() => {
+      this.goodsList = [...this.goodsList, ...newGoodsList];
+    });
   };
 }
