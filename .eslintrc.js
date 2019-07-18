@@ -1,3 +1,7 @@
+const OFF = 0;
+const WARN = 1;
+const ERROR = 2;
+
 module.exports = {
   root: true,
 
@@ -39,10 +43,10 @@ module.exports = {
   },
 
   rules: {
-    'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
+    'no-console': [ERROR, { allow: ['error', 'warn', 'info'] }],
 
     'jsx-a11y/anchor-is-valid': [
-      'error',
+      ERROR,
       {
         components: ['Link'],
         specialLink: ['to'],
@@ -51,14 +55,14 @@ module.exports = {
     ],
 
     'react/jsx-filename-extension': [
-      'error',
+      ERROR,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
 
     // 使用文件扩展名 1. 确保引用目标唯一; 2. 加速 webpack 文件检索;
-    'import/extensions': ['error', 'always', { ignorePackages: true }],
+    'import/extensions': [ERROR, 'always', { ignorePackages: true }],
 
-    'prettier/prettier': 'error',
+    'prettier/prettier': ERROR,
   },
 
   overrides: [
@@ -95,25 +99,25 @@ module.exports = {
       // make sure to disable the ESLint rule here.
       rules: {
         // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
-        'default-case': 'off',
+        'default-case': OFF,
         // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
-        'no-dupe-class-members': 'off',
+        'no-dupe-class-members': OFF,
 
         // Add TypeScript specific rules (and turn off ESLint equivalents)
-        '@typescript-eslint/no-angle-bracket-type-assertion': 'warn',
-        'no-array-constructor': 'off',
-        '@typescript-eslint/no-array-constructor': 'warn',
-        '@typescript-eslint/no-namespace': 'error',
-        'no-unused-vars': 'off',
+        '@typescript-eslint/no-angle-bracket-type-assertion': WARN,
+        'no-array-constructor': OFF,
+        '@typescript-eslint/no-array-constructor': WARN,
+        '@typescript-eslint/no-namespace': ERROR,
+        'no-unused-vars': OFF,
         '@typescript-eslint/no-unused-vars': [
-          'warn',
+          WARN,
           {
             args: 'none',
             ignoreRestSiblings: true,
           },
         ],
-        'no-useless-constructor': 'off',
-        '@typescript-eslint/no-useless-constructor': 'warn',
+        'no-useless-constructor': OFF,
+        '@typescript-eslint/no-useless-constructor': WARN,
       },
     },
   ],
