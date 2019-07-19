@@ -12,7 +12,7 @@
 [![@babel/preset-env (latest)](https://img.shields.io/npm/v/@babel/preset-env/latest.svg?label=%40babel%2Fpreset-env)](https://babeljs.io/)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/lovelope/react-project/feature/ts.svg)](https://github.com/lovelope/react-project/commits/feature/ts)
 [![GitHub top language](https://img.shields.io/github/languages/top/lovelope/react-project.svg)](https://en.wikipedia.org/wiki/JavaScript)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/lovelope/react-project/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/lovelope/react-project/pulls) [![Greenkeeper badge](https://badges.greenkeeper.io/lovelope/react-project.svg)](https://greenkeeper.io/)
 
 ---
 
