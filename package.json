@@ -34,7 +34,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --no-ignore --fix",
+      "eslint --fix",
       "git add --force"
     ],
     "*.{json,md,graphql}": [
