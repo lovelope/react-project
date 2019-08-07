@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 
 // 本地化
-import { LocaleProvider } from 'antd';
-import zhCN from 'antd/es/locale-provider/zh_CN.js';
-
-// 语法高亮
-import 'prismjs/themes/prism.css';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN.js';
 
 import App from '@/App.tsx';
 // @ts-ignore
@@ -17,9 +14,9 @@ const store = new Store();
 
 ReactDOM.render(
   <Provider store={store}>
-    <LocaleProvider locale={zhCN}>
+    <ConfigProvider locale={zhCN}>
       <App />
-    </LocaleProvider>
+    </ConfigProvider>
   </Provider>,
   document.getElementById('root')
 );
