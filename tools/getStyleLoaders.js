@@ -23,7 +23,8 @@ export default function getStyleLoaders({
       ? MiniCssExtractPlugin.loader
       : {
           loader: 'style-loader',
-          options: { sourceMap },
+          // the `sourceMap` option was removed.
+          // The loader automatically inject source maps if the previous loader emit them
         },
 
     {
