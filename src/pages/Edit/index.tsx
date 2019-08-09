@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Button } from 'antd';
+
 import DefineForm, {
   defaultLabelColSpan,
-} from '@/components/DefineForm/index.js';
+  DefineFormProps,
+} from '@/components/DefineForm/index.tsx';
 
 // formItems即为表单的配置项
-import formItems from './customFormItems.js';
+// @ts-ignore
+import formItems from './customFormItems.tsx';
 
 // 模拟发请求（在做修改操作时，表单需要先填充已有数据，这里写了个假的获取详情接口）
 const requestDetail = () =>
@@ -27,28 +30,38 @@ const requestDetail = () =>
   });
 
 class Edit extends Component {
+  // form instance
+  private formRef: React.ReactComponentElement<
+    typeof DefineForm,
+    DefineFormProps
+  > | null;
+
   constructor(props) {
     super(props);
     this.formRef = null;
   }
 
   handleGetDetail = () => {
-    requestDetail().then(res => {
+    requestDetail().then((res: any) => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
       res.RangePicker = res.RangePicker.map(d => moment(d));
-      this.formRef.setFieldsValue(res);
+      if (this.formRef) {
+        this.formRef.props.form.setFieldsValue(res);
+      }
     });
   };
 
   handleSubmit = () => {
-    this.formRef.validateFieldsAndScroll((err, values) => {
-      console.info(values);
-      if (err) {
-        return;
-      }
-      console.info('校验通过');
-    });
+    if (this.formRef) {
+      this.formRef.props.form.validateFieldsAndScroll((err, values) => {
+        console.info(values);
+        if (err) {
+          return;
+        }
+        console.info('校验通过');
+      });
+    }
   };
 
   render() {
@@ -63,7 +76,7 @@ class Edit extends Component {
         </Button>
 
         <DefineForm
-          ref={node => {
+          wrappedComponentRef={node => {
             this.formRef = node;
           }}
           items={formItems}
