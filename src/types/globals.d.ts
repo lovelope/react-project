@@ -8,7 +8,8 @@ declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+// md
+declare module '*.md';
 
 interface Ipagination {
   page: number;

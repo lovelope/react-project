@@ -1,16 +1,13 @@
-import { observable, computed, action, runInAction } from 'mobx';
 import Mock from 'mockjs';
 
 /* eslint-disable prettier/prettier */
 const delay = (ms: number): Promise<void> =>
-  new Promise(
-    (resolve): void => {
-      setTimeout(resolve, ms);
-    }
-  );
+  new Promise((resolve): void => {
+    setTimeout(resolve, ms);
+  });
 /* eslint-enable prettier/prettier */
 
-interface Goods {
+export interface Goods {
   id: string;
   goodsName: string;
   price: number;
@@ -40,25 +37,19 @@ async function generateGoods(n = 10): Promise<Goods[]> {
   return arr;
 }
 
-export default class Store {
-  public constructor() {
-    this.getGoodsList();
-  }
+export default function createStore() {
+  return {
+    goodsList: [] as Goods[],
 
-  @observable.ref
-  public goodsList: Goods[] = [];
+    get total(): number {
+      return this.goodsList.length;
+    },
 
-  @computed
-  public get total(): number {
-    return this.goodsList.length;
-  }
-
-  // 需要使用箭头函数方法，否则取不到 this
-  @action
-  public getGoodsList = async (): Promise<void> => {
-    const newGoodsList = await generateGoods();
-    runInAction(() => {
+    async getGoodsList(): Promise<void> {
+      const newGoodsList = await generateGoods();
       this.goodsList = [...this.goodsList, ...newGoodsList];
-    });
+    },
   };
 }
+
+export type GoodsStore = ReturnType<typeof createStore>;

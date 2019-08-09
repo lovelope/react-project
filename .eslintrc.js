@@ -86,7 +86,6 @@ module.exports = {
 
         project: 'tsconfig.json',
 
-        // typescript-eslint specific options
         warnOnUnsupportedTypeScriptVersion: true,
       },
       plugins: [
@@ -95,15 +94,11 @@ module.exports = {
         'eslint-plugin-import/config/typescript',
         'eslint-plugin-prettier',
       ],
-      // If adding a typescript-eslint version of an existing ESLint rule,
-      // make sure to disable the ESLint rule here.
+
       rules: {
-        // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
         'default-case': OFF,
-        // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
         'no-dupe-class-members': OFF,
 
-        // Add TypeScript specific rules (and turn off ESLint equivalents)
         '@typescript-eslint/no-angle-bracket-type-assertion': WARN,
         'no-array-constructor': OFF,
         '@typescript-eslint/no-array-constructor': WARN,

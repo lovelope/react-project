@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'antd';
+// @ts-ignore
+import { RangePickerValue } from 'antd/lib/date-picker/interface.d.ts';
 import style from './index.module.less';
 
-class Home extends Component {
+interface State {
+  value: RangePickerValue | null;
+}
+class Home extends Component<any, State> {
   constructor(props) {
     super(props);
     this.state = {
