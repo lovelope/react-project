@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import qs from 'qs';
@@ -22,10 +23,10 @@ type Tbody =
   | FormData
   | URLSearchParams
   | ReadableStream<Uint8Array>
-  | Iobject
+  | IObject
   | null;
 
-interface IfetchCommonOptions {
+interface IFetchCommonOptions {
   headers?: Headers | Record<string, string> | string[][];
   mode?: 'cors' | 'no-cors' | 'same-origin';
   credentials?: 'omit' | 'same-origin' | 'include';
@@ -48,33 +49,33 @@ interface IfetchCommonOptions {
   integrity?: string;
 }
 
-interface IrequestInitOptions {
-  defaultOptions?: IfetchCommonOptions;
-  transformRequest?: TinterceptorPair<TresquestInterceptorOptions>[];
-  transformResponse?: TinterceptorPair<TresponseInterceptorOptions>[];
+interface IRequestInitOptions {
+  defaultOptions?: IFetchCommonOptions;
+  transformRequest?: TInterceptorPair<TRequestInterceptorOptions>[];
+  transformResponse?: TInterceptorPair<TResponseInterceptorOptions>[];
 }
 
-interface IfetchOptions extends IfetchCommonOptions {
+interface IFetchOptions extends IFetchCommonOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
   body?: Tbody;
 }
 
-interface Iobject {
-  [prop: string]: any;
+interface IObject {
+  [prop: string]: unknown;
 }
 
-interface IinputOptions extends IfetchOptions {
-  params?: Iobject;
-  query?: Iobject;
-  transformRequest?: TinterceptorPair<TresquestInterceptorOptions>[];
-  transformResponse?: TinterceptorPair<TresponseInterceptorOptions>[];
+interface IInputOptions extends IFetchOptions {
+  params?: IObject;
+  query?: IObject;
+  transformRequest?: TInterceptorPair<TRequestInterceptorOptions>[];
+  transformResponse?: TInterceptorPair<TResponseInterceptorOptions>[];
 }
 
-type TresquestInterceptorOptions = IinputOptions & {
+type TRequestInterceptorOptions = IInputOptions & {
   url: string;
 };
 
-type TresponseInterceptorOptions =
+type TResponseInterceptorOptions =
   | Response
   | Blob
   | FormData
@@ -83,22 +84,22 @@ type TresponseInterceptorOptions =
   | never
   | any;
 
-type Tidentity<T> = (arg: T) => T;
+type TIdentity<T> = (arg: T) => T;
 
-type TinterceptorPair<T = any> = {
-  onFulfilled: Tidentity<T>;
-  onRejected?: Tidentity<any>;
+type TInterceptorPair<T = any> = {
+  onFulfilled: TIdentity<T>;
+  onRejected?: TIdentity<any>;
 } | null;
 
 class InterceptorsManager<T = {}> {
-  public interceptors: TinterceptorPair<T>[];
+  public interceptors: TInterceptorPair<T>[];
 
-  public constructor(interceptors: TinterceptorPair<T>[] = []) {
+  public constructor(interceptors: TInterceptorPair<T>[] = []) {
     this.interceptors = interceptors;
   }
 
-  public use(onFulfilled: Tidentity<T>, onRejected?: Tidentity<any>): number {
-    const interceptorPair: TinterceptorPair<T> = { onFulfilled };
+  public use(onFulfilled: TIdentity<T>, onRejected?: TIdentity<any>): number {
+    const interceptorPair: TInterceptorPair<T> = { onFulfilled };
     if (onRejected) {
       interceptorPair.onRejected = onRejected;
     }
@@ -114,7 +115,7 @@ class InterceptorsManager<T = {}> {
 
   public compose(
     promise: Promise<T>,
-    extraInterceptors: TinterceptorPair<T>[] = []
+    extraInterceptors: TInterceptorPair<T>[] = []
   ) {
     return extraInterceptors.concat(this.interceptors).reduce((acc, pair) => {
       if (!pair) {
@@ -131,31 +132,31 @@ class InterceptorsManager<T = {}> {
 
 class R {
   public interceptors: {
-    request: InterceptorsManager<TresquestInterceptorOptions>;
-    response: InterceptorsManager<TresponseInterceptorOptions>;
+    request: InterceptorsManager<TRequestInterceptorOptions>;
+    response: InterceptorsManager<TResponseInterceptorOptions>;
   };
 
-  public defaultOptions: IfetchCommonOptions;
+  public defaultOptions: IFetchCommonOptions;
 
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
-  constructor(initOptions: IrequestInitOptions = {}) {
+  constructor(initOptions: IRequestInitOptions = {}) {
     const {
       defaultOptions = {},
       transformRequest = [],
       transformResponse = [],
     } = initOptions;
     this.interceptors = {
-      request: new InterceptorsManager<TresquestInterceptorOptions>(
+      request: new InterceptorsManager<TRequestInterceptorOptions>(
         transformRequest
       ),
-      response: new InterceptorsManager<TresponseInterceptorOptions>(
+      response: new InterceptorsManager<TResponseInterceptorOptions>(
         transformResponse
       ),
     };
     this.defaultOptions = defaultOptions;
   }
 
-  public fetch(url: string, options: IinputOptions) {
+  public fetch(url: string, options: IInputOptions) {
     const fullInputOptions = merge({}, this.defaultOptions, options);
     const {
       transformRequest,
@@ -180,38 +181,38 @@ class R {
     return responsePromise as Promise<any>;
   }
 
-  public get<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public get<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'GET' });
     return result as Promise<R>;
   }
 
-  public post<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public post<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'POST' });
     return result as Promise<R>;
   }
 
-  public put<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public put<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'PUT' });
     return result as Promise<R>;
   }
 
-  public patch<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public patch<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'PATCH' });
     return result as Promise<R>;
   }
 
-  public head<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public head<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'HEAD' });
     return result as Promise<R>;
   }
 
-  public delete<R = ResponseSchema>(url: string, options: IinputOptions = {}) {
+  public delete<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'DELETE' });
     return result as Promise<R>;
   }
 }
 
-function authorize(options: TresquestInterceptorOptions) {
+function authorize(options: TRequestInterceptorOptions) {
   // eslint-disable-next-line no-param-reassign
   options.headers = Object.assign(options.headers || {}, {
     Accept: 'application/json, */*',
@@ -220,19 +221,19 @@ function authorize(options: TresquestInterceptorOptions) {
   return options;
 }
 
-function fillParams(options: TresquestInterceptorOptions) {
+function fillParams(options: TRequestInterceptorOptions) {
   const { url, params } = options;
   if (params) {
     // eslint-disable-next-line no-param-reassign
-    options.url = url.replace(
+    options.url = (url as string).replace(
       /:([a-z0-9_\-%]+)/gi,
-      (source, $1) => params[$1] || ''
+      (source, $1) => (params[$1] as string) || ''
     );
   }
   return options;
 }
 
-function serializeQuery(options: TresquestInterceptorOptions) {
+function serializeQuery(options: TRequestInterceptorOptions) {
   const { url, query } = options;
   if (query) {
     const search = url.split('?')[1];
@@ -242,7 +243,7 @@ function serializeQuery(options: TresquestInterceptorOptions) {
   return options;
 }
 
-function addContentType(options: TresquestInterceptorOptions) {
+function addContentType(options: TRequestInterceptorOptions) {
   const { body, method, query } = options;
   let { headers } = options;
   if (!headers) {
