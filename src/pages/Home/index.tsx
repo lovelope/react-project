@@ -10,14 +10,16 @@ interface State {
 class Home extends Component<any, State> {
   constructor(props) {
     super(props);
-    this.state = {
-      value: null,
-    };
+
     this.handleChange = this.handleChange.bind(this);
   }
 
+  readonly state: State = {
+    value: null,
+  };
+
   handleChange(date, dateString) {
-    console.info(date, dateString, Object.assign({}, { a: 1 }, { b: false }));
+    console.info(date, dateString, { a: 1, b: false });
     this.setState({ value: date });
   }
 

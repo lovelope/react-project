@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import { Form, Input } from 'antd';
 import {
@@ -64,7 +65,8 @@ export interface DefineFormProps {
 // antd form need get component instance by using class component
 // eslint-disable-next-line react/prefer-stateless-function
 class DefineForm extends Component<DefineFormProps> {
-  static defaultProps = {
+  // eslint-disable-next-line react/static-property-placement
+  static readonly defaultProps: { layout: DefineFormItemLayout } = {
     layout: defaultFormItemLayout,
   };
 

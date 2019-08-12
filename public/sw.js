@@ -1,3 +1,4 @@
+/* eslint-env: serviceWorker */
 self.addEventListener('error', function(e) {
   self.clients.matchAll().then(function(clients) {
     if (clients && clients.length) {
