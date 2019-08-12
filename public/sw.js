@@ -35,7 +35,7 @@ workbox.setConfig({
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
-// api 网络优先
+// api 网络优先，只能缓存 GET 请求
 workbox.routing.registerRoute(
   /\/api\d?\//i,
   new workbox.strategies.NetworkFirst({
