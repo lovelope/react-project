@@ -16,7 +16,7 @@ interface DefineFormItemLayout {
   wrapperCol?: ColProps;
 }
 // 默认的layout
-export const defaultLabelColSpan: number = 6;
+export const defaultLabelColSpan = 6;
 const defaultFormItemLayout: DefineFormItemLayout = {
   labelCol: { span: defaultLabelColSpan },
   wrapperCol: { span: 14 },
@@ -43,7 +43,7 @@ const FormItemRender = ({
   item,
   layout,
   getFieldDecorator,
-}: FormItemRenderProps) => {
+}: FormItemRenderProps): React.ReactElement => {
   const { label, key, required, component, options = {}, rules } = item;
   return (
     <FormItem key={key} label={label} {...layout}>
@@ -57,7 +57,7 @@ const FormItemRender = ({
 
 export interface DefineFormProps {
   form: WrappedFormUtils;
-  wrappedComponentRef?: any;
+  wrappedComponentRef?: unknown;
   items: DefineFormItem[];
   layout?: DefineFormItemLayout;
 }
@@ -66,11 +66,11 @@ export interface DefineFormProps {
 // eslint-disable-next-line react/prefer-stateless-function
 class DefineForm extends Component<DefineFormProps> {
   // eslint-disable-next-line react/static-property-placement
-  static readonly defaultProps: { layout: DefineFormItemLayout } = {
+  public static readonly defaultProps: { layout: DefineFormItemLayout } = {
     layout: defaultFormItemLayout,
   };
 
-  render() {
+  public render(): React.ReactElement {
     // items格式即为配置的表单项
     const {
       items,
@@ -80,12 +80,14 @@ class DefineForm extends Component<DefineFormProps> {
 
     return (
       <Form>
-        {(items || []).map(item => (
-          <FormItemRender
-            key={item.key}
-            {...{ item, layout, getFieldDecorator }}
-          />
-        ))}
+        {(items || []).map(
+          (item): React.ReactElement => (
+            <FormItemRender
+              key={item.key}
+              {...{ item, layout, getFieldDecorator }}
+            />
+          )
+        )}
       </Form>
     );
   }

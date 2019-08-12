@@ -4,26 +4,27 @@ import { DatePicker } from 'antd';
 import { RangePickerValue } from 'antd/lib/date-picker/interface.d.ts';
 import style from './index.module.less';
 
+type Props = AnyObject;
 interface State {
   value: RangePickerValue | null;
 }
-class Home extends Component<any, State> {
-  constructor(props) {
+class Home extends Component<Props, State> {
+  public constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  readonly state: State = {
+  public readonly state: State = {
     value: null,
   };
 
-  handleChange(date, dateString) {
+  private handleChange(date, dateString): void {
     console.info(date, dateString, { a: 1, b: false });
     this.setState({ value: date });
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { value } = this.state;
     return (
       <div className={style['page-home']}>

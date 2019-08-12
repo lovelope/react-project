@@ -11,7 +11,11 @@ declare module '*.jpeg';
 // md
 declare module '*.md';
 
-interface Ipagination {
+interface AnyObject {
+  [key: string]: unknown;
+}
+
+interface Pagination {
   page: number;
   pageSize: number;
   totalCount: number;

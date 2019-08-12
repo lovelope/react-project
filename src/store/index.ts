@@ -37,7 +37,13 @@ async function generateGoods(n = 10): Promise<Goods[]> {
   return arr;
 }
 
-export default function createStore() {
+interface GoodsStore {
+  goodsList: Goods[];
+  total: number;
+  getGoodsList: () => Promise<void>;
+}
+
+export default function createStore(): GoodsStore {
   return {
     goodsList: [] as Goods[],
 
@@ -51,5 +57,3 @@ export default function createStore() {
     },
   };
 }
-
-export type GoodsStore = ReturnType<typeof createStore>;
