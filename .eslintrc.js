@@ -88,6 +88,11 @@ module.exports = {
 
         warnOnUnsupportedTypeScriptVersion: true,
       },
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'eslint-config-prettier',
+        'eslint-config-prettier/@typescript-eslint',
+      ],
       plugins: [
         'eslint-plugin-react-hooks',
         '@typescript-eslint/eslint-plugin',

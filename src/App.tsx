@@ -9,7 +9,7 @@ import Loading from '@/components/Loading/index.tsx';
 
 const historyInstance = createBrowserHistory();
 
-export default function App() {
+export default function App(): React.ReactElement {
   return (
     <Router history={historyInstance}>
       <Suspense fallback={<Loading />}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { Button } from 'antd';
 
 import DefineForm, {
@@ -11,21 +11,34 @@ import DefineForm, {
 // @ts-ignore
 import formItems from './customFormItems.tsx';
 
+interface DefineData {
+  Input: string;
+  password: string;
+  Select: string;
+  RadioGroup: string;
+  RadioButtonGroup: string;
+  CheckboxGroup: string[];
+  DatePicker: string | Moment;
+  RangePicker: [string, string] | [Moment, Moment];
+  Switch: boolean;
+}
+const resData: DefineData = {
+  Input: 'Input',
+  password: 'password',
+  Select: 'option2',
+  RadioGroup: 'radio2',
+  RadioButtonGroup: 'radio2',
+  CheckboxGroup: ['checkbox2'],
+  DatePicker: '2018-05-15T13:36:27.132Z',
+  RangePicker: ['2018-04-15T13:36:27.132Z', '2018-05-15T13:36:27.132Z'],
+  Switch: true,
+};
+
 // 模拟发请求（在做修改操作时，表单需要先填充已有数据，这里写了个假的获取详情接口）
-const requestDetail = () =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
-        Input: 'Input',
-        password: 'password',
-        Select: 'option2',
-        RadioGroup: 'radio2',
-        RadioButtonGroup: 'radio2',
-        CheckboxGroup: ['checkbox2'],
-        DatePicker: '2018-05-15T13:36:27.132Z',
-        RangePicker: ['2018-04-15T13:36:27.132Z', '2018-05-15T13:36:27.132Z'],
-        Switch: true,
-      });
+const requestDetail = (): Promise<DefineData> =>
+  new Promise((resolve): void => {
+    setTimeout((): void => {
+      resolve(resData);
     }, 1500);
   });
 
@@ -36,25 +49,28 @@ class Edit extends Component {
     DefineFormProps
   > | null;
 
-  constructor(props) {
+  public constructor(props) {
     super(props);
     this.formRef = null;
   }
 
-  handleGetDetail = () => {
-    requestDetail().then((res: any) => {
+  private handleGetDetail = (): void => {
+    requestDetail().then((res: DefineData): void => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
-      res.RangePicker = res.RangePicker.map(d => moment(d));
+      res.RangePicker = [
+        moment(res.RangePicker[0]),
+        moment(res.RangePicker[1]),
+      ];
       if (this.formRef) {
         this.formRef.props.form.setFieldsValue(res);
       }
     });
   };
 
-  handleSubmit = () => {
+  private handleSubmit = (): void => {
     if (this.formRef) {
-      this.formRef.props.form.validateFieldsAndScroll((err, values) => {
+      this.formRef.props.form.validateFieldsAndScroll((err, values): void => {
         console.info(values);
         if (err) {
           return;
@@ -64,7 +80,7 @@ class Edit extends Component {
     }
   };
 
-  render() {
+  public render(): React.ReactElement {
     return (
       <div>
         <Button
@@ -76,7 +92,7 @@ class Edit extends Component {
         </Button>
 
         <DefineForm
-          wrappedComponentRef={node => {
+          wrappedComponentRef={(node): void => {
             this.formRef = node;
           }}
           items={formItems}

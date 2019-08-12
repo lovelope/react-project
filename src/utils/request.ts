@@ -23,10 +23,10 @@ type Tbody =
   | FormData
   | URLSearchParams
   | ReadableStream<Uint8Array>
-  | IObject
+  | AnyObject
   | null;
 
-interface IFetchCommonOptions {
+interface FetchCommonOptions {
   headers?: Headers | Record<string, string> | string[][];
   mode?: 'cors' | 'no-cors' | 'same-origin';
   credentials?: 'omit' | 'same-origin' | 'include';
@@ -49,29 +49,25 @@ interface IFetchCommonOptions {
   integrity?: string;
 }
 
-interface IRequestInitOptions {
-  defaultOptions?: IFetchCommonOptions;
+interface RequestInitOptions {
+  defaultOptions?: FetchCommonOptions;
   transformRequest?: TInterceptorPair<TRequestInterceptorOptions>[];
   transformResponse?: TInterceptorPair<TResponseInterceptorOptions>[];
 }
 
-interface IFetchOptions extends IFetchCommonOptions {
+interface FetchOptions extends FetchCommonOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
   body?: Tbody;
 }
 
-interface IObject {
-  [prop: string]: unknown;
-}
-
-interface IInputOptions extends IFetchOptions {
-  params?: IObject;
-  query?: IObject;
+interface InputOptions extends FetchOptions {
+  params?: AnyObject;
+  query?: AnyObject;
   transformRequest?: TInterceptorPair<TRequestInterceptorOptions>[];
   transformResponse?: TInterceptorPair<TResponseInterceptorOptions>[];
 }
 
-type TRequestInterceptorOptions = IInputOptions & {
+type TRequestInterceptorOptions = InputOptions & {
   url: string;
 };
 
@@ -136,10 +132,10 @@ class R {
     response: InterceptorsManager<TResponseInterceptorOptions>;
   };
 
-  public defaultOptions: IFetchCommonOptions;
+  public defaultOptions: FetchCommonOptions;
 
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
-  constructor(initOptions: IRequestInitOptions = {}) {
+  constructor(initOptions: RequestInitOptions = {}) {
     const {
       defaultOptions = {},
       transformRequest = [],
@@ -156,7 +152,7 @@ class R {
     this.defaultOptions = defaultOptions;
   }
 
-  public fetch(url: string, options: IInputOptions) {
+  public fetch(url: string, options: InputOptions) {
     const fullInputOptions = merge({}, this.defaultOptions, options);
     const {
       transformRequest,
@@ -181,32 +177,32 @@ class R {
     return responsePromise as Promise<any>;
   }
 
-  public get<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public get<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'GET' });
     return result as Promise<R>;
   }
 
-  public post<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public post<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'POST' });
     return result as Promise<R>;
   }
 
-  public put<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public put<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'PUT' });
     return result as Promise<R>;
   }
 
-  public patch<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public patch<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'PATCH' });
     return result as Promise<R>;
   }
 
-  public head<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public head<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'HEAD' });
     return result as Promise<R>;
   }
 
-  public delete<R = ResponseSchema>(url: string, options: IInputOptions = {}) {
+  public delete<R = ResponseSchema>(url: string, options: InputOptions = {}) {
     const result = this.fetch(url, { ...options, method: 'DELETE' });
     return result as Promise<R>;
   }
@@ -361,7 +357,7 @@ export interface ResponseSchema<T = any> {
   errcode: number | string;
   message: string;
   data: T;
-  pagination: Ipagination;
+  pagination: Pagination;
 }
 
 // 示例

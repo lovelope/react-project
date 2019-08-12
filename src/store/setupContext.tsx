@@ -5,7 +5,11 @@ import createStore, { GoodsStore } from './index.ts';
 
 const storeContext = React.createContext<GoodsStore | null>(null);
 
-export const StoreProvider = ({ children }: { children: React.ReactChild }) => {
+export const StoreProvider = ({
+  children,
+}: {
+  children: React.ReactChild;
+}): React.ReactElement => {
   const store = useLocalStore(createStore);
 
   return (
@@ -13,7 +17,7 @@ export const StoreProvider = ({ children }: { children: React.ReactChild }) => {
   );
 };
 
-export const useStore = () => {
+export const useStore = (): GoodsStore => {
   const store = React.useContext(storeContext);
   if (!store) {
     throw new Error('You have forgot to use StoreProvider, shame on you.');

@@ -4,8 +4,10 @@ import 'prismjs/themes/prism.css';
 // @ts-ignore
 import Mdx from '@/components/DefineForm/README.md';
 
-export default () => (
-  <div>
-    <Mdx />
-  </div>
-);
+export default function Demo(): React.ReactElement {
+  return (
+    <div>
+      <Mdx />
+    </div>
+  );
+}
