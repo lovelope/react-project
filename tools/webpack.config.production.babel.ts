@@ -3,6 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import webpack from 'webpack';
+import merge from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Terser from 'terser';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -31,8 +32,8 @@ const PRIVATE_SOURCE_MAP_SERVER = getValueByEnv(urls, {
   field: 'PRIVATE_SOURCE_MAP_SERVER',
   defaultEnv: 'online',
 });
-const SOURCE_MAP_PUBLIC_PATH = USE_PRIVATE_SOURCE_MAP_SERVER
-  ? PRIVATE_SOURCE_MAP_SERVER
+const SOURCE_MAP_PUBLIC_PATH: string = USE_PRIVATE_SOURCE_MAP_SERVER
+  ? (PRIVATE_SOURCE_MAP_SERVER as string)
   : PUBLIC_PATH;
 
 let manifestJson = null;
@@ -47,8 +48,7 @@ if (USE_DLL) {
   }
 }
 
-const webpackConfigProd: webpack.Configuration = {
-  ...webpackConfigBase,
+const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
   mode: 'production',
 
   // 使用 SourceMapDevToolPlugin 生成的 sourcemap
@@ -111,8 +111,6 @@ const webpackConfigProd: webpack.Configuration = {
     },
   },
   plugins: [
-    ...webpackConfigBase.plugins,
-
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash:8].css' : '[name].css',
       chunkFilename: isProd ? 'css/[id].[contenthash:8].css' : '[id].css',
@@ -141,7 +139,7 @@ const webpackConfigProd: webpack.Configuration = {
 
     USE_DLL &&
       new webpack.DllReferencePlugin({
-        manifest: manifestJson,
+        manifest: manifestJson as any,
       } as webpack.DllReferencePlugin.Options),
 
     USE_DLL &&
@@ -170,11 +168,11 @@ const webpackConfigProd: webpack.Configuration = {
         from: paths.appPublic,
         to: paths.appDist,
         transform(content, filePath): string {
-          if (/\.js$/.test(filePath)) {
+          if (filePath.endsWith('.js')) {
             // 将 Buffer(content) 转为 String(source)
             const source = content.toString('utf8');
             const { code } = Terser.minify(source);
-            return code;
+            return code as string;
           }
           return content;
         },
@@ -182,6 +180,6 @@ const webpackConfigProd: webpack.Configuration = {
       },
     ]),
   ].filter(Boolean),
-};
+});
 
 export default webpackConfigProd;

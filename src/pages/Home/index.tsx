@@ -11,18 +11,15 @@ interface State {
 class Home extends Component<Props, State> {
   public constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      value: null,
+    };
   }
 
-  public readonly state: State = {
-    value: null,
-  };
-
-  private handleChange(date, dateString): void {
+  private handleChange = (date, dateString): void => {
     console.info(date, dateString, { a: 1, b: false });
     this.setState({ value: date });
-  }
+  };
 
   public render(): React.ReactElement {
     const { value } = this.state;

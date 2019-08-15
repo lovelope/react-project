@@ -37,7 +37,7 @@ async function generateGoods(n = 10): Promise<Goods[]> {
   return arr;
 }
 
-interface GoodsStore {
+export interface GoodsStore {
   goodsList: Goods[];
   total: number;
   getGoodsList: () => Promise<void>;

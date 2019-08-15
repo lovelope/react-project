@@ -7,7 +7,7 @@
 export default function getValueByEnv(
   obj,
   { field = '', defaultEnv = 'dev' }
-): any {
+): unknown {
   let value = obj[defaultEnv];
   Object.keys(obj).forEach((envKey: string): void => {
     if (process.env[`npm_config_${envKey}`]) {

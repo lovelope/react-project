@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      impliedStrict: true, // 全局严格模式
+      impliedStrict: true,
       jsx: true,
     },
   },
@@ -31,10 +31,11 @@ module.exports = {
   },
 
   settings: {
+    'import/extensions': ['.ts', '.tsx', '.d.ts', '.js', '.jsx'],
     'import/resolver': {
       alias: {
         map: [['@', './src']],
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+        extensions: ['.ts', '.tsx', '.d.ts', '.js', '.jsx'],
       },
     },
     react: {
@@ -56,11 +57,18 @@ module.exports = {
 
     'react/jsx-filename-extension': [
       ERROR,
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+      { extensions: ['.js', '.jsx', '.tsx'] },
     ],
 
-    // 使用文件扩展名 1. 确保引用目标唯一; 2. 加速 webpack 文件检索;
-    'import/extensions': [ERROR, 'always', { ignorePackages: true }],
+    // with some error here
+    // 'import/extensions': [
+    //   ERROR,
+    //   'always',
+    //   {
+    //     ignorePackages: true,
+    //     pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
+    //   },
+    // ],
 
     'prettier/prettier': ERROR,
   },
@@ -70,7 +78,7 @@ module.exports = {
       files: ['**/*.d.ts'],
       parser: '@typescript-eslint/parser',
       rules: {
-        // 类型引入
+        // type reference
         'spaced-comment': 'off',
       },
     },
@@ -84,12 +92,12 @@ module.exports = {
           jsx: true,
         },
 
-        project: 'tsconfig.json',
+        project: 'tsconfig.eslint.json',
 
         warnOnUnsupportedTypeScriptVersion: true,
       },
       extends: [
-        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'eslint-config-prettier',
         'eslint-config-prettier/@typescript-eslint',
       ],
@@ -104,7 +112,6 @@ module.exports = {
         'default-case': OFF,
         'no-dupe-class-members': OFF,
 
-        '@typescript-eslint/no-angle-bracket-type-assertion': WARN,
         'no-array-constructor': OFF,
         '@typescript-eslint/no-array-constructor': WARN,
         '@typescript-eslint/no-namespace': ERROR,
