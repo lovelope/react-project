@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'antd';
-// @ts-ignore
-import { RangePickerValue } from 'antd/lib/date-picker/interface.d.ts';
+import { Moment } from 'moment';
 import style from './index.module.less';
 
 type Props = AnyObject;
 interface State {
-  value: RangePickerValue | null;
+  value: Moment | null;
 }
 class Home extends Component<Props, State> {
   public constructor(props) {
@@ -26,7 +25,7 @@ class Home extends Component<Props, State> {
     return (
       <div className={style['page-home']}>
         <h1>Home</h1>
-        <DatePicker value={value} onChange={this.handleChange} />
+        <DatePicker value={value as Moment} onChange={this.handleChange} />
       </div>
     );
   }
