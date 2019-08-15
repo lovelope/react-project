@@ -82,6 +82,6 @@ npm run build
 [commit]: https://img.shields.io/github/last-commit/lovelope/react-project/feature/ts.svg
 [commit-url]: https://github.com/lovelope/react-project/commits/feature/ts
 [language]: https://img.shields.io/github/languages/top/lovelope/react-project.svg
-[language-url]: https://github.com/tc39/ecma262
+[language-url]: https://www.typescriptlang.org
 [pr]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [pr-url]: https://github.com/lovelope/react-project/pulls
