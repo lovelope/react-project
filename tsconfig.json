@@ -15,8 +15,7 @@
     },
     "sourceMap": true,
     "strict": true,
-    "target": "esnext",
-    "types": ["node", "react", "react-dom", "antd", "webpack-env"]
+    "target": "esnext"
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]

@@ -2,12 +2,13 @@ import fs from 'fs';
 import path from 'path';
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const resolveApp = (relativePath): string =>
+  path.resolve(appDirectory, relativePath);
 
 // 查找入口文件，可能是 ts 也可能是 js
-const resolveModule = (resolveFn, filePath) => {
+const resolveModule = (resolveFn, filePath): string => {
   const moduleFileExtensions = ['js', 'jsx', 'ts', 'tsx'];
-  const extension = moduleFileExtensions.find(ext =>
+  const extension = moduleFileExtensions.find((ext): boolean =>
     fs.existsSync(resolveFn(`${filePath}.${ext}`))
   );
 

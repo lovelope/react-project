@@ -1,17 +1,22 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import webpack from 'webpack';
+import webpackDevServer from 'webpack-dev-server';
+import merge from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpackConfigBase from './webpack.config.base.babel.js';
-import paths, { PUBLIC_PATH } from './paths.js';
-import proxyConfigAll from './proxy.config.js';
-import getValueByEnv from './getValueByEnv.js';
+
+import webpackConfigBase from './webpack.config.base.babel';
+import paths, { PUBLIC_PATH } from './paths';
+import proxyConfigAll from './proxy.config';
+import getValueByEnv from './getValueByEnv';
 
 const HOST = process.env.HOST || '0.0.0.0'; // 本机IP
 const PORT = process.env.PORT || 8080; // 端口号
 
 const proxyCurrent = getValueByEnv(proxyConfigAll, { defaultEnv: 'dev' });
 
-const webpackConfigDev = {
-  ...webpackConfigBase,
+const webpackConfigDev: webpack.Configuration = merge(webpackConfigBase, {
   devServer: {
     // 允许访问的机器列表
     allowedHosts: [HOST, 'localhost', '127.0.0.1'],
@@ -51,8 +56,8 @@ const webpackConfigDev = {
 
     // 此选项允许浏览器使用本地 IP 打开。
     useLocalIp: true,
-  },
-  plugins: webpackConfigBase.plugins.concat([
+  } as webpackDevServer.Configuration,
+  plugins: [
     // html 模板
     new HtmlWebpackPlugin({
       inject: true,
@@ -61,7 +66,7 @@ const webpackConfigDev = {
 
     // 模块热替换
     new webpack.HotModuleReplacementPlugin(),
-  ]),
-};
+  ],
+});
 
 export default webpackConfigDev;
