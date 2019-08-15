@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLocalStore } from 'mobx-react';
-// @ts-ignore
-import createStore, { GoodsStore } from './index.ts';
+import createStore, { GoodsStore } from './index';
 
 const storeContext = React.createContext<GoodsStore | null>(null);
 

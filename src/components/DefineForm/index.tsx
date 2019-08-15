@@ -1,13 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import { Form, Input } from 'antd';
-import {
-  ValidationRule,
-  WrappedFormUtils,
-  // @ts-ignore
-} from 'antd/es/form/Form.d.ts';
-// @ts-ignore
-import { ColProps } from 'antd/es/grid/col.d.ts';
+import { ValidationRule, WrappedFormUtils } from 'antd/es/form/Form';
+import { ColProps } from 'antd/es/grid/col';
 
 const FormItem = Form.Item;
 

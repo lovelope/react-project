@@ -221,7 +221,7 @@ function fillParams(options: TRequestInterceptorOptions) {
   const { url, params } = options;
   if (params) {
     // eslint-disable-next-line no-param-reassign
-    options.url = (url as string).replace(
+    options.url = url.replace(
       /:([a-z0-9_\-%]+)/gi,
       (source, $1) => (params[$1] as string) || ''
     );
