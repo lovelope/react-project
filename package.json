@@ -10,15 +10,15 @@
   "author": "lovelope <lovelope@qq.com>",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config tools/webpack.config.production.babel.js",
-    "build:dll": "cross-env NODE_ENV=production webpack --config tools/webpack.config.dll.babel.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "build:dll": "cross-env NODE_ENV=production webpack --config tools/webpack.config.dll.babel.ts",
     "fix": "npm run fix-js && npm run lint-css",
     "fix-js": "npm run lint-js --fix",
-    "format": "prettier --config prettier.config.js --write '**/*.{js,jsx,css,less,json}'",
+    "format": "prettier --config prettier.config.js --write \"**/*.{ts,tsx,js,jsx,css,less,json,md,html}\"",
     "lint": "npm run lint-js && npm run lint-css",
     "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
     "lint-js": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config tools/webpack.config.development.babel.js --color --progress"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --color --progress"
   },
   "husky": {
     "hooks": {
@@ -97,7 +97,9 @@
     "@types/node": "^12.7.2",
     "@types/react": "^16.9.1",
     "@types/react-dom": "^16.8.5",
-    "@types/webpack-env": "^1.14.0",
+    "@types/webpack": "^4.32.1",
+    "@types/webpack-dev-server": "^3.1.7",
+    "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "babel-eslint": "^10.0.2",
@@ -142,10 +144,13 @@
     "stylelint-order": "^3.0.1",
     "terser": "^4.1.4",
     "terser-webpack-plugin": "^1.4.1",
+    "ts-node": "^8.3.0",
+    "tsconfig-paths": "^3.8.0",
     "typescript": "^3.5.3",
     "url-loader": "^2.1.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.1"
   }
 }

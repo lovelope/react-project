@@ -1,7 +1,11 @@
-import webpack from 'webpack';
-import paths from './paths.js';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
 
-export default {
+import webpack from 'webpack';
+
+import paths from './paths';
+
+const dllConfig: webpack.Configuration = {
   mode: 'production',
   entry: {
     vendor: ['react', 'react-dom', 'react-router', 'mobx', 'mobx-react'],
@@ -18,3 +22,5 @@ export default {
     }),
   ],
 };
+
+export default dllConfig;

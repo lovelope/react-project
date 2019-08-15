@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Terser from 'terser';
@@ -7,11 +11,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import webpackConfigBase from './webpack.config.base.babel.js';
-import paths from './paths.js';
-import urls from './urls.js';
-import getValueByEnv from './getValueByEnv.js';
-import switchConfig from './switch.config.js';
+
+import webpackConfigBase from './webpack.config.base.babel';
+import paths, { PUBLIC_PATH } from './paths';
+import urls from './urls';
+import getValueByEnv from './getValueByEnv';
+import switchConfig from './switch.config';
 
 const {
   USE_DLL,
@@ -26,9 +31,9 @@ const PRIVATE_SOURCE_MAP_SERVER = getValueByEnv(urls, {
   field: 'PRIVATE_SOURCE_MAP_SERVER',
   defaultEnv: 'online',
 });
-const SOURCE_MAP_PUBLICH_PATH = USE_PRIVATE_SOURCE_MAP_SERVER
+const SOURCE_MAP_PUBLIC_PATH = USE_PRIVATE_SOURCE_MAP_SERVER
   ? PRIVATE_SOURCE_MAP_SERVER
-  : paths.publicPath;
+  : PUBLIC_PATH;
 
 let manifestJson = null;
 if (USE_DLL) {
@@ -42,7 +47,7 @@ if (USE_DLL) {
   }
 }
 
-const webpackConfigProd = {
+const webpackConfigProd: webpack.Configuration = {
   ...webpackConfigBase,
   mode: 'production',
 
@@ -137,7 +142,7 @@ const webpackConfigProd = {
     USE_DLL &&
       new webpack.DllReferencePlugin({
         manifest: manifestJson,
-      }),
+      } as webpack.DllReferencePlugin.Options),
 
     USE_DLL &&
       new HtmlWebpackTagsPlugin({
@@ -148,8 +153,7 @@ const webpackConfigProd = {
     // 自定义 sourcemap 地址
     new webpack.SourceMapDevToolPlugin({
       filename: 'sourcemaps/[file].map',
-      publicPath: SOURCE_MAP_PUBLICH_PATH,
-      fileContext: 'js',
+      publicPath: SOURCE_MAP_PUBLIC_PATH,
     }),
 
     // 清理旧文件, plugins 顺序应该放在最后
@@ -165,7 +169,7 @@ const webpackConfigProd = {
       {
         from: paths.appPublic,
         to: paths.appDist,
-        transform(content, filePath) {
+        transform(content, filePath): string {
           if (/\.js$/.test(filePath)) {
             // 将 Buffer(content) 转为 String(source)
             const source = content.toString('utf8');

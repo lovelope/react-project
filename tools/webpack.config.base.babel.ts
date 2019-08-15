@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import path from 'path';
 import os from 'os';
 
@@ -7,10 +10,10 @@ import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import mdHighlightPlugin from '@mapbox/rehype-prism';
 
-import paths, { PUBLIC_PATH } from './paths.js';
-import getTheme from './theme.js';
-import getStyleLoaders from './getStyleLoaders.js';
-import switchConfig from './switch.config.js';
+import paths, { PUBLIC_PATH } from './paths';
+import getTheme from './theme';
+import getStyleLoaders from './getStyleLoaders';
+import switchConfig from './switch.config';
 
 // 构造出共享进程池，进程池中包含cpu+1个子进程
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length + 1 });
@@ -29,7 +32,11 @@ const REGEXP_MODULE_LESS = /\.module\.less$/;
 const REGEXP_CSS = /\.css$/;
 const REGEXP_LESS = /\.less$/;
 
-export default {
+/**
+ *
+ * @export {webpack.Configuration} default
+ */
+const config: webpack.Configuration = {
   context: paths.appRoot,
 
   mode: isProd ? 'production' : 'development',
@@ -50,7 +57,7 @@ export default {
       ? 'js/[name].[hash:8].chunk.js'
       : 'js/[name].chunk.js',
     // 格式化 windows 上的文件路径
-    devtoolModuleFilenameTemplate: info =>
+    devtoolModuleFilenameTemplate: (info): string =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
@@ -209,6 +216,7 @@ export default {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+    // eslint-disable-next-line @typescript-eslint/camelcase
     child_process: 'empty',
   },
 
@@ -229,3 +237,5 @@ export default {
 
   performance: false,
 };
+
+export default config;

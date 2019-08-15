@@ -1,23 +1,55 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
- * 获取 cssLoaders
- * @param {object} options 配置
- * @param {boolean} options.isProd 是否为生产环境
- * @param {boolean} options.sourceMap 是否开启sourceMap
- * @param {boolean} options.modules 是否开启css modules
- * @param {boolean} options.useLess 是否使用 less
- * @param {object} options.modifyVars 覆盖 less 变量
- * @returns {object[]} loader数组
+ * 获取 cssLoaders 配置
+ * @interface GetStyleLoadersOptions
  */
+interface GetStyleLoadersOptions {
+  /**
+   * 是否为生产环境
+   * @type {boolean}
+   * @memberof GetStyleLoadersOptions
+   */
+  isProd?: boolean;
+
+  /**
+   * 是否开启sourceMap
+   * @type {boolean}
+   * @memberof GetStyleLoadersOptions
+   */
+  sourceMap?: boolean;
+
+  /**
+   * 是否开启css modules
+   * @type {boolean}
+   * @memberof GetStyleLoadersOptions
+   */
+  modules?: boolean;
+
+  /**
+   * 是否使用 less
+   * @type {boolean}
+   * @memberof GetStyleLoadersOptions
+   */
+  useLess?: boolean;
+
+  /**
+   * 覆盖 less 变量
+   * @type {object}
+   * @memberof GetStyleLoadersOptions
+   */
+  modifyVars?: {};
+}
+
 export default function getStyleLoaders({
   isProd = true, // 生产环境
   sourceMap = true, // 打开 sourceMap
   modules = false, // 开启 css module
   useLess = false, // 使用 less
   modifyVars = {}, // 修改 less 变量
-}) {
+}: GetStyleLoadersOptions): webpack.RuleSetUseItem[] {
   return [
     isProd
       ? MiniCssExtractPlugin.loader

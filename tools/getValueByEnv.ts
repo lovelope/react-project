@@ -4,9 +4,12 @@
  * @param {Object} obj 对象
  * @param {Object} param1 { @param {String} field key 值, @param {String} defaultEnv 默认环境}
  */
-export default function getValueByEnv(obj, { field = '', defaultEnv = 'dev' }) {
+export default function getValueByEnv(
+  obj,
+  { field = '', defaultEnv = 'dev' }
+): any {
   let value = obj[defaultEnv];
-  Object.keys(obj).forEach(envKey => {
+  Object.keys(obj).forEach((envKey: string): void => {
     if (process.env[`npm_config_${envKey}`]) {
       value = obj[envKey];
     }

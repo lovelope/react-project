@@ -2,7 +2,7 @@
 import lessToJs from 'less-vars-to-js';
 import fs from 'fs';
 
-export default function getTheme(path) {
+export default function getTheme(path): object {
   let themeContent = '';
 
   // 解决 theme 文件不存在的异常
