@@ -4,12 +4,9 @@
 import qs from 'qs';
 import { merge } from 'lodash';
 
-// @ts-ignore
-import { getToken } from './helper.ts';
-// @ts-ignore
-import { LOGOUT_URL } from './urls.ts';
-// @ts-ignore
-import { AUTH_ERROR_CODE } from './code.ts';
+import { getToken } from './helper';
+import { LOGOUT_URL } from './urls';
+import { AUTH_ERROR_CODE } from './code';
 
 const { toString } = Object.prototype;
 
@@ -354,10 +351,9 @@ export default request;
 
 export interface ResponseSchema<T = any> {
   code: number | string;
-  errcode: number | string;
   message: string;
   data: T;
-  pagination: Pagination;
+  pagination?: Pagination;
 }
 
 // 示例

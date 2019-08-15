@@ -3,8 +3,7 @@ import { observer } from 'mobx-react';
 import { Button, Table } from 'antd';
 import s from './goodsList.module.less';
 import { useStore, StoreProvider } from '@/store/setupContext.tsx';
-// @ts-ignore
-import { getColumns } from './const.ts';
+import { getColumns } from './const';
 
 const columns = getColumns({
   renderImg: (text): React.ReactElement => <img src={text} alt="" />,

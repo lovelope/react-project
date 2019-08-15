@@ -8,8 +8,7 @@ import DefineForm, {
 } from '@/components/DefineForm/index.tsx';
 
 // formItems即为表单的配置项
-// @ts-ignore
-import formItems from './customFormItems.tsx';
+import formItems from './customFormItems';
 
 interface DefineData {
   Input: string;

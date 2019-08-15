@@ -139,6 +139,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
 
     USE_DLL &&
       new webpack.DllReferencePlugin({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         manifest: manifestJson as any,
       } as webpack.DllReferencePlugin.Options),
 

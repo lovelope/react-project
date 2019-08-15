@@ -1,6 +1,5 @@
 import React from 'react';
-// @ts-ignore
-import { Goods } from '@/store/index.ts';
+import { Goods } from '@/store';
 import s from './goodsItem.module.less';
 
 type Props = Goods;

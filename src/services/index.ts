@@ -1,11 +1,17 @@
-import request from '@/utils/request.ts';
+import request, { ResponseSchema } from '@/utils/request.ts';
+import { Goods } from '@/store';
 
-export function getGoodsList({ page }): Promise<AnyObject> {
-  // @ts-ignore
-  return request('/api/goods/list', { body: { page } });
+interface GoodsList {
+  list: Goods[];
+}
+export function getGoodsList({ page }): Promise<ResponseSchema<GoodsList>> {
+  return request.get<ResponseSchema<GoodsList>>('/api/goods/list', {
+    body: { page },
+  });
 }
 
-export function getGoods({ goodsId }): Promise<AnyObject> {
-  // @ts-ignore
-  return request('/api/goods/detail', { body: { goodsId } });
+export function getGoods({ goodsId }): Promise<ResponseSchema<Goods>> {
+  return request.get<ResponseSchema<Goods>>('/api/goods/detail', {
+    body: { goodsId },
+  });
 }
