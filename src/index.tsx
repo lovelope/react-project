@@ -11,5 +11,5 @@ ReactDOM.render(
   <ConfigProvider locale={zhCN}>
     <App />
   </ConfigProvider>,
-  document.querySelector<HTMLDivElement>('root')
+  document.querySelector<HTMLDivElement>('#root')
 );
