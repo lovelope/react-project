@@ -59,7 +59,7 @@ npm run build
 
 [TODO.md](./TODO.md)
 
-[travis-ci]: https://api.travis-ci.org/lovelope/react-project.svg?branch=feature%2Fts
+[travis-ci]: https://api.travis-ci.org/lovelope/react-project.svg?branch=master
 [travis-ci-url]: https://travis-ci.org/lovelope/react-project
 [license]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: https://opensource.org/licenses/MIT
@@ -70,7 +70,7 @@ npm run build
 [stylelint]: https://img.shields.io/npm/v/stylelint/latest.svg?label=stylelint
 [stylelint-url]: https://stylelint.io/
 [dependencies]: https://img.shields.io/david/lovelope/react-project.svg
-[dependencies-url]: https://github.com/lovelope/react-project/raw/feature/ts/package.json
+[dependencies-url]: https://github.com/lovelope/react-project/raw/master/package.json
 [antd]: https://img.shields.io/npm/v/antd/latest.svg?label=antd
 [antd-url]: https://ant.design/
 [mobx]: https://img.shields.io/npm/v/mobx/mobx4.svg?label=mobx%40mobx4
@@ -79,8 +79,8 @@ npm run build
 [webpack-url]: https://webpack.js.org/
 [babel]: https://img.shields.io/npm/v/@babel/preset-env/latest.svg?label=%40babel%2Fpreset-env
 [babel-url]: https://babeljs.io/
-[commit]: https://img.shields.io/github/last-commit/lovelope/react-project/feature/ts.svg
-[commit-url]: https://github.com/lovelope/react-project/commits/feature/ts
+[commit]: https://img.shields.io/github/last-commit/lovelope/react-project/master.svg
+[commit-url]: https://github.com/lovelope/react-project/commits/master
 [language]: https://img.shields.io/github/languages/top/lovelope/react-project.svg
 [language-url]: https://www.typescriptlang.org
 [pr]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
