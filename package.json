@@ -142,7 +142,7 @@
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-order": "^3.0.1",
-    "terser": "^4.2.0",
+    "terser": "^4.2.1",
     "terser-webpack-plugin": "^1.4.1",
     "ts-node": "^8.3.0",
     "tsconfig-paths": "^3.8.0",
