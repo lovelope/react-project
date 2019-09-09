@@ -61,7 +61,7 @@
     ]
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
+    "@babel/polyfill": "^7.6.0",
     "antd": "^3.23.1",
     "core-js": "^2.6.9",
     "history": "^4.9.0",
