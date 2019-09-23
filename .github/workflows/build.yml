@@ -1,0 +1,38 @@
+name: Build and test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build and test for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-2016, macOS-latest]
+    steps:
+      - name: Configure git
+        run: git config --global core.symlinks true
+
+      - name: Clone repository
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Log versions
+        run: |
+          node -v
+          npm -v
+
+      - name: Setup
+        run: npm install
+
+      - name: Build
+        run: |
+          npm run build:dll
+          npm run build
