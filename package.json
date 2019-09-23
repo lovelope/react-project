@@ -16,7 +16,7 @@
     "fix-js": "npm run lint-js --fix",
     "format": "prettier --config prettier.config.js --write \"**/*.{ts,tsx,js,jsx,css,less,json,md,html}\"",
     "lint": "npm run lint-js && npm run lint-css",
-    "lint-css": "stylelint \"src/**/*.{less}\" --syntax less",
+    "lint-css": "stylelint \"src/**/*.{css,less}\" --syntax less",
     "lint-js": "eslint . --ext .js,.jsx,.ts,.tsx",
     "start": "cross-env NODE_ENV=development webpack-dev-server --color --progress"
   },
