@@ -1,6 +1,7 @@
 # [React Project](https://github.com/lovelope/react-project)
 
-[![Build Status][travis-ci]][travis-ci-url]
+[![Travis Build Status][travis-ci]][travis-ci-url]
+[![Github Actions Build Status][github-actions]][github-actions-url]
 [![GitHub license][license]][license-url]
 [![JavaScript Style Guide][airbnb]][airbnb-url]
 [![code style: prettier][prettier]][prettier-url]
@@ -61,6 +62,8 @@ npm run build
 
 [travis-ci]: https://api.travis-ci.org/lovelope/react-project.svg?branch=master
 [travis-ci-url]: https://travis-ci.org/lovelope/react-project
+[github-actions]: https://github.com/lovelope/react-project/workflows/build/badge.svg
+[github-actions-url]: https://github.com/lovelope/react-project/actions?workflow=build
 [license]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: https://opensource.org/licenses/MIT
 [airbnb]: https://img.shields.io/badge/code_style-airbnb-brightgreen.svg
