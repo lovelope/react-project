@@ -144,7 +144,7 @@
     "stylelint-order": "^3.1.1",
     "terser": "^4.3.3",
     "terser-webpack-plugin": "^2.1.0",
-    "ts-node": "^8.3.0",
+    "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.8.0",
     "typescript": "~3.5.3",
     "url-loader": "^2.1.0",
