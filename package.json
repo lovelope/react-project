@@ -140,7 +140,7 @@
     "progress-bar-webpack-plugin": "^1.12.1",
     "style-loader": "^1.0.0",
     "stylelint": "^10.1.0",
-    "stylelint-config-standard": "^18.3.0",
+    "stylelint-config-standard": "^19.0.0",
     "stylelint-order": "^3.1.1",
     "terser": "^4.3.3",
     "terser-webpack-plugin": "^2.1.0",
