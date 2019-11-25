@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
-    "antd": "^3.25.2",
+    "antd": "^3.25.3",
     "core-js": "^2.6.10",
     "history": "^4.10.1",
     "js-cookie": "^2.2.1",
