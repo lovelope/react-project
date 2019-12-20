@@ -12,18 +12,14 @@
 
   // eslint 自动修复
   "eslint.alwaysShowStatus": true,
-  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
-    {
-      "autoFix": true,
-      "language": "typescript"
-    },
-    {
-      "autoFix": true,
-      "language": "typescriptreact"
-    }
+    "typescript",
+    "typescriptreact"
   ],
   "files.autoSave": "onFocusChange",
   "typescript.tsdk": "node_modules/typescript/lib",

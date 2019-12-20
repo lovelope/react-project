@@ -61,14 +61,14 @@ module.exports = {
     ],
 
     // with some error here
-    // 'import/extensions': [
-    //   ERROR,
-    //   'always',
-    //   {
-    //     ignorePackages: true,
-    //     pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
-    //   },
-    // ],
+    'import/extensions': [
+      WARN,
+      'always',
+      {
+        ignorePackages: true,
+        // pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
+      },
+    ],
 
     'prettier/prettier': ERROR,
   },
@@ -125,6 +125,15 @@ module.exports = {
         ],
         'no-useless-constructor': OFF,
         '@typescript-eslint/no-useless-constructor': WARN,
+
+        'import/extensions': [
+          WARN,
+          'always',
+          {
+            ignorePackages: true,
+            // pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
+          },
+        ],
       },
     },
   ],

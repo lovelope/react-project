@@ -177,7 +177,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
           }
           return content;
         },
-        ignore: 'index.html',
+        ignore: ['index.html'],
       },
     ]),
   ].filter(Boolean),
