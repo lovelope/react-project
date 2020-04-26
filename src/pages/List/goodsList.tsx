@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react';
 import { Button, Table } from 'antd';
-import { useStore, StoreProvider } from '@/store/setupContext.tsx';
+import { useStore, StoreProvider } from '@/store/setupContext';
 import s from './goodsList.module.less';
 import { getColumns } from './const';
 

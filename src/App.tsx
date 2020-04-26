@@ -2,10 +2,10 @@ import React, { Suspense } from 'react';
 import { Router, Switch, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 
-import routes from '@/router/index.ts';
+import routes from '@/router';
 import '@/App.less';
 
-import Loading from '@/components/Loading/index.tsx';
+import Loading from '@/components/Loading';
 
 const historyInstance = createBrowserHistory();
 

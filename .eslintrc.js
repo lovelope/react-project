@@ -66,7 +66,7 @@ module.exports = {
       'always',
       {
         ignorePackages: true,
-        // pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
+        pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
       },
     ],
 
@@ -131,7 +131,7 @@ module.exports = {
           'always',
           {
             ignorePackages: true,
-            // pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
+            pattern: { ts: 'never', tsx: 'never', 'd.ts': 'never' },
           },
         ],
       },

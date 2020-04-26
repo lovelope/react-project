@@ -1,4 +1,4 @@
-import request, { ResponseSchema } from '@/utils/request.ts';
+import request, { ResponseSchema } from '@/utils/request';
 import { Goods } from '@/store';
 
 interface GoodsList {

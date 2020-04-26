@@ -1,6 +1,6 @@
 /* eslint-env: serviceWorker */
-self.addEventListener('error', function(e) {
-  self.clients.matchAll().then(function(clients) {
+self.addEventListener('error', function (e) {
+  self.clients.matchAll().then(function (clients) {
     if (clients && clients.length) {
       clients[0].postMessage({
         type: 'ERROR',
@@ -11,8 +11,8 @@ self.addEventListener('error', function(e) {
   });
 });
 
-self.addEventListener('unhandledrejection', function(e) {
-  self.clients.matchAll().then(function(clients) {
+self.addEventListener('unhandledrejection', function (e) {
+  self.clients.matchAll().then(function (clients) {
     if (clients && clients.length) {
       clients[0].postMessage({
         type: 'REJECTION',

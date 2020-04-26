@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import DefineForm, {
   defaultLabelColSpan,
   DefineFormProps,
-} from '@/components/DefineForm/index.tsx';
+} from '@/components/DefineForm';
 
 // formItems即为表单的配置项
 import formItems from './customFormItems';

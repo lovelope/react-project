@@ -85,9 +85,11 @@ export default function getStyleLoaders({
     useLess && {
       loader: 'less-loader',
       options: {
-        javascriptEnabled: true,
-        modifyVars,
-        sourceMap,
+        lessOptions: {
+          javascriptEnabled: true,
+          modifyVars,
+          sourceMap,
+        },
       },
     },
   ].filter(Boolean);

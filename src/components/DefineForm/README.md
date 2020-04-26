@@ -13,7 +13,7 @@ import formItems from './customFormItems';
 
 // 模拟发请求（在做修改操作时，表单需要先填充已有数据，这里写了个假的获取详情接口）
 const requestDetail = () =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         Input: 'Input',
@@ -36,10 +36,10 @@ class Edit extends Component {
   }
 
   handleGetDetail = () => {
-    requestDetail().then(res => {
+    requestDetail().then((res) => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
-      res.RangePicker = res.RangePicker.map(d => moment(d));
+      res.RangePicker = res.RangePicker.map((d) => moment(d));
       this.formRef.setFieldsValue(res);
     });
   };
@@ -66,7 +66,7 @@ class Edit extends Component {
         </Button>
 
         <DefineForm
-          ref={node => {
+          ref={(node) => {
             this.formRef = node;
           }}
           items={formItems}
