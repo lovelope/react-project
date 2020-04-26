@@ -23,13 +23,10 @@ self.addEventListener('unhandledrejection', function(e) {
   });
 });
 
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
-);
+importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js');
 workbox.setConfig({
   debug: true,
-  modulePathPrefix:
-    'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/',
+  modulePathPrefix: 'https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/',
 });
 
 workbox.core.skipWaiting();
@@ -41,7 +38,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst({
     cacheName: 'api',
     plugins: [
-      new workbox.expiration.Plugin({
+      new workbox.ExpirationPlugin({
         maxEntries: 100,
       }),
     ],
@@ -54,7 +51,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst({
     cacheName: 'html',
     plugins: [
-      new workbox.expiration.Plugin({
+      new workbox.ExpirationPlugin({
         maxEntries: 5,
       }),
     ],
@@ -67,10 +64,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'supplier:cdn',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.expiration.Plugin({
+      new workbox.ExpirationPlugin({
         maxEntries: 50,
       }),
     ],
@@ -83,10 +80,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'static',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.expiration.Plugin({
+      new workbox.ExpirationPlugin({
         // 保持 100 条目
         maxEntries: 100,
         // 最大缓存时间 7 天
@@ -102,10 +99,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'image',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.expiration.Plugin({
+      new workbox.ExpirationPlugin({
         // 保持 200 条目
         maxEntries: 200,
         // 最大缓存时间 30 天
