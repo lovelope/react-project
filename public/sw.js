@@ -38,7 +38,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst({
     cacheName: 'api',
     plugins: [
-      new workbox.ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 100,
       }),
     ],
@@ -51,7 +51,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst({
     cacheName: 'html',
     plugins: [
-      new workbox.ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 5,
       }),
     ],
@@ -64,10 +64,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'supplier:cdn',
     plugins: [
-      new workbox.CacheableResponsePlugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 50,
       }),
     ],
@@ -80,10 +80,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'static',
     plugins: [
-      new workbox.CacheableResponsePlugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         // 保持 100 条目
         maxEntries: 100,
         // 最大缓存时间 7 天
@@ -99,10 +99,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'image',
     plugins: [
-      new workbox.CacheableResponsePlugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new workbox.ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         // 保持 200 条目
         maxEntries: 200,
         // 最大缓存时间 30 天
