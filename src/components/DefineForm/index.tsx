@@ -30,6 +30,7 @@ export interface DefineFormItem {
 
 interface FormItemRenderProps {
   item: DefineFormItem;
+  // eslint-disable-next-line react/require-default-props
   layout?: DefineFormItemLayout;
   getFieldDecorator: WrappedFormUtils['getFieldDecorator'];
 }
