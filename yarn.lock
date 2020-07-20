@@ -1184,16 +1184,16 @@
     refractor "^2.3.0"
     unist-util-visit "^1.1.3"
 
-"@mdx-js/loader@^1.6.6":
-  version "1.6.6"
-  resolved "https://registry.npm.taobao.org/@mdx-js/loader/download/@mdx-js/loader-1.6.6.tgz#de7438f3b18b097d66380f8698123a91c587a2f9"
-  integrity sha1-3nQ487GLCX1mOA+GmBI6kcWHovk=
+"@mdx-js/loader@^1.6.13":
+  version "1.6.13"
+  resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.13.tgz#3696057e98a170180d6e13af90e07359cba74742"
+  integrity sha512-+1JQ/d1z1Jflilg7eQgNSePAJd4GEYS+P25oPcNpBfdH79ytIsMeyZ4V0ztikXLBejsDAiJcIbEtWdsqxE1Q4w==
   dependencies:
-    "@mdx-js/mdx" "^1.6.6"
-    "@mdx-js/react" "^1.6.6"
+    "@mdx-js/mdx" "1.6.13"
+    "@mdx-js/react" "1.6.13"
     loader-utils "2.0.0"
 
-"@mdx-js/mdx@^1.6.13", "@mdx-js/mdx@^1.6.6":
+"@mdx-js/mdx@1.6.13", "@mdx-js/mdx@^1.6.13":
   version "1.6.13"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.13.tgz#6b2ba52e1b19131d0f99cad730a3dcd7b6cb1d02"
   integrity sha512-xVZnzSQ/QsP6LnYnV5CC9sc92dzm0VsnFEbpDhB3ahbrCc0j/p4O5+q+OIic9H3AAYLIzoKah3Mj+wTnDpAeWg==
@@ -1218,10 +1218,10 @@
     unist-builder "2.0.3"
     unist-util-visit "2.0.3"
 
-"@mdx-js/react@^1.6.6":
-  version "1.6.6"
-  resolved "https://registry.npm.taobao.org/@mdx-js/react/download/@mdx-js/react-1.6.6.tgz#71ece2a24261eed0e184c0ef9814fcb77b1a4aee"
-  integrity sha1-ceziokJh7tDhhMDvmBT8t3saSu4=
+"@mdx-js/react@1.6.13":
+  version "1.6.13"
+  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.13.tgz#d58d2db408ee1fb2bfd6314d3cc86c444d08dc52"
+  integrity sha512-k8UfufP+eZbxHsprAvGvQB/vmiXpbhMYnM0c6xov5xEg3dYdtzrpjnf2kYsTIwyr3RG2SeZXGjE9tG9vzli53Q==
 
 "@mdx-js/util@1.6.13":
   version "1.6.13"
