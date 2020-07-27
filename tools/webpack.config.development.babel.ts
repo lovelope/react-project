@@ -3,7 +3,7 @@
 
 import webpack from 'webpack';
 import webpackDevServer from 'webpack-dev-server';
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import webpackConfigBase from './webpack.config.base.babel';
