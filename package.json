@@ -89,7 +89,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/register": "^7.10.5",
     "@commitlint/cli": "^9.1.1",
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/config-conventional": "^9.1.1",
     "@mapbox/rehype-prism": "^0.5.0",
     "@mdx-js/loader": "^1.6.16",
     "@mdx-js/mdx": "^1.6.16",
