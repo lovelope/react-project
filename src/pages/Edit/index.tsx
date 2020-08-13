@@ -48,7 +48,7 @@ class Edit extends Component {
     DefineFormProps
   > | null;
 
-  public constructor(props) {
+  public constructor(props: Readonly<unknown>) {
     super(props);
     this.formRef = null;
   }

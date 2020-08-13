@@ -5,8 +5,8 @@
  * @param {Object} param1 { @param {String} field key 值, @param {String} defaultEnv 默认环境}
  */
 export default function getValueByEnv(
-  obj,
-  { field = '', defaultEnv = 'dev' }
+  obj: Record<string, unknown>,
+  { field = '', defaultEnv = 'dev' }: { field?: string; defaultEnv?: string }
 ): unknown {
   let value = obj[defaultEnv];
   Object.keys(obj).forEach((envKey: string): void => {

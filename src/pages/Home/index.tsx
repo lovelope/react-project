@@ -8,7 +8,7 @@ interface State {
   value: Moment | null;
 }
 class Home extends Component<Props, State> {
-  public constructor(props) {
+  public constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
       value: null,

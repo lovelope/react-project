@@ -40,7 +40,7 @@ interface GetStyleLoadersOptions {
    * @type {object}
    * @memberof GetStyleLoadersOptions
    */
-  modifyVars?: {};
+  modifyVars?: Record<string, unknown>;
 }
 
 export default function getStyleLoaders({

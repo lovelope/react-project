@@ -8,7 +8,11 @@ interface GoodsType {
   price: number;
 }
 
-export const getColumns = ({ renderImg }): ColumnProps<GoodsType>[] => [
+export const getColumns = ({
+  renderImg,
+}: {
+  renderImg: () => React.ReactNode;
+}): ColumnProps<GoodsType>[] => [
   {
     title: '商品id',
     dataIndex: 'id',

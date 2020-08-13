@@ -84,7 +84,7 @@ type TInterceptorPair<T = any> = {
   onRejected?: TIdentity<any>;
 } | null;
 
-class InterceptorsManager<T = {}> {
+class InterceptorsManager<T = unknown> {
   public interceptors: TInterceptorPair<T>[];
 
   public constructor(interceptors: TInterceptorPair<T>[] = []) {

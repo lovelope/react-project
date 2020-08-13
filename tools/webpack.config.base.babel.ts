@@ -57,8 +57,9 @@ const config: webpack.Configuration = {
       ? 'js/[name].[hash:8].chunk.js'
       : 'js/[name].chunk.js',
     // 格式化 windows 上的文件路径
-    devtoolModuleFilenameTemplate: (info): string =>
-      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: (
+      info: webpack.DevtoolModuleFilenameTemplateInfo
+    ): string => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
   devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
@@ -216,7 +217,6 @@ const config: webpack.Configuration = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    // eslint-disable-next-line @typescript-eslint/camelcase
     child_process: 'empty',
   },
 

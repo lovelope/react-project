@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 
