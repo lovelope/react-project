@@ -122,7 +122,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "file-loader": "^6.0.0",
     "happypack": "^5.0.1",
-    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-plugin": "^4.4.0",
     "html-webpack-tags-plugin": "^2.0.17",
     "husky": "^4.2.5",
     "less": "^3.12.2",
