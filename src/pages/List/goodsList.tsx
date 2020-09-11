@@ -6,7 +6,7 @@ import s from './goodsList.module.less';
 import { getColumns } from './const';
 
 const columns = getColumns({
-  renderImg: (text): React.ReactElement => <img src={text} alt="" />,
+  renderImg: (src: string): React.ReactElement => <img src={src} alt="" />,
 });
 
 const GoodsList = observer(

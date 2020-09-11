@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable no-shadow */
 import qs from 'qs';
 import { merge } from 'lodash';
 

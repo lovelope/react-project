@@ -114,6 +114,8 @@ module.exports = {
 
         'no-array-constructor': OFF,
         '@typescript-eslint/no-array-constructor': WARN,
+        'no-use-before-define': OFF,
+        '@typescript-eslint/no-use-before-define': WARN,
         '@typescript-eslint/no-namespace': ERROR,
         'no-unused-vars': OFF,
         '@typescript-eslint/no-unused-vars': [

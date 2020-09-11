@@ -11,7 +11,7 @@ interface GoodsType {
 export const getColumns = ({
   renderImg,
 }: {
-  renderImg: () => React.ReactNode;
+  renderImg: (src: string) => React.ReactNode;
 }): ColumnProps<GoodsType>[] => [
   {
     title: '商品id',
