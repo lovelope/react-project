@@ -1932,10 +1932,10 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
 
-antd@^3.26.18:
-  version "3.26.18"
-  resolved "https://registry.npmjs.org/antd/-/antd-3.26.18.tgz#541e26a6865dd20e5d192027c45599b963146e67"
-  integrity sha512-TPuacNJJNPji+LnapU46uWGqi+6JlyH75paMNs95IH0F7gGYtp4oSkua88gGsoAaUbDxTIF+cWI9mdIsr7ywlw==
+antd@^3.26.19:
+  version "3.26.19"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-3.26.19.tgz#e8d1ad225587446f16c22256148d97fc2d533164"
+  integrity sha512-NcSaI0jMLhdPBoTC7p9qqe8aF9Y+YHWNPNpORY98qYADvO2aXHwyRi0YUAZLauDCvDWNTfeiACBeQaFvUhXApQ==
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
     "@ant-design/icons" "~2.1.1"
