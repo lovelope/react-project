@@ -63,7 +63,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "antd": "^3.26.20",
-    "core-js": "^2.6.11",
+    "core-js": "^2.6.12",
     "history": "4.x",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.20",
