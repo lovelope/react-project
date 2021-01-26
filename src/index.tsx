@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN.js';
 
-import App from '@/App.tsx';
+import App from '@/App';
 
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>

@@ -18,7 +18,7 @@
     "lint": "npm run lint-js && npm run lint-css",
     "lint-css": "stylelint \"src/**/*.{css,less}\" --syntax less",
     "lint-js": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --color --progress"
+    "start": "cross-env NODE_ENV=development webpack serve --color --progress"
   },
   "husky": {
     "hooks": {
