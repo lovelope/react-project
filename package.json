@@ -94,7 +94,7 @@
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/mdx": "^1.6.22",
     "@types/lodash": "^4.14.166",
-    "@types/node": "^14.14.25",
+    "@types/node": "^14.14.26",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "@types/webpack": "^4.41.25",
