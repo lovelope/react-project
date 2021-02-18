@@ -11620,10 +11620,10 @@ websocket-extensions@>=0.1.1:
   resolved "https://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
   integrity sha1-f4RzvIOd/YdgituV1+sHUhFXikI=
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.0.tgz#3d3cd5396d986936991f79674ff811a67dc5dcc0"
-  integrity sha512-ZgtzIak+vJhRBRdz/64QikloqIyeOufspzwd7ch/TSNdK4e/kC5PqL7W4uwj0l/SyagqRkRJii5JEsufbniLgw==
+whatwg-fetch@>=0.10.0, whatwg-fetch@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.1.tgz#93bc4005af6c2cc30ba3e42ec3125947c8f54ed3"
+  integrity sha512-IEmN/ZfmMw6G1hgZpVd0LuZXOQDisrMOZrzYd5x3RAK4bMPlJohKUZWZ9t/QsTvH0dV9TbPDcc2OSuIDcihnHA==
 
 which-module@^2.0.0:
   version "2.0.0"
