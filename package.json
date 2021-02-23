@@ -123,7 +123,7 @@
     "file-loader": "^6.2.0",
     "happypack": "^5.0.1",
     "html-webpack-plugin": "^4.5.2",
-    "html-webpack-tags-plugin": "^2.0.17",
+    "html-webpack-tags-plugin": "^3.0.0",
     "husky": "^4.3.6",
     "less": "^4.1.1",
     "less-loader": "^6.2.0",
