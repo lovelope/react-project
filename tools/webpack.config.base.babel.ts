@@ -176,7 +176,7 @@ const config: webpack.Configuration = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     // 构建进度条
-    new ProgressBarPlugin(),
+    !process.env.CI && new ProgressBarPlugin(),
 
     // lodash 按需打包
     new LodashModuleReplacementPlugin({
@@ -210,7 +210,7 @@ const config: webpack.Configuration = {
         },
       ],
     }),
-  ],
+  ].filter(Boolean),
 
   node: {
     dgram: 'empty',

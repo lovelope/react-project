@@ -168,11 +168,11 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
         {
           from: paths.appPublic,
           to: paths.appDist,
-          transform(content, filePath): string {
+          async transform(content, filePath): Promise<string> {
             if (filePath.endsWith('.js')) {
               // 将 Buffer(content) 转为 String(source)
               const source = content.toString('utf8');
-              const { code } = Terser.minify(source);
+              const { code } = await Terser.minify(source);
               return code as string;
             }
             return content;
