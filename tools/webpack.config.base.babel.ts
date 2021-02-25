@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import HappyPack from 'happypack';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 import mdHighlightPlugin from '@mapbox/rehype-prism';
 
 import paths, { PUBLIC_PATH } from './paths';
@@ -16,7 +17,10 @@ import getStyleLoaders from './getStyleLoaders';
 import switchConfig from './switch.config';
 
 // 构造出共享进程池，进程池中包含cpu+1个子进程
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length + 1 });
+const happyThreadPool = HappyPack.ThreadPool({
+  size: os.cpus().length + 1,
+  id: 'babel',
+});
 
 const { OPEN_SOURCE_MAP } = switchConfig;
 // 覆盖 antd 主题
@@ -74,13 +78,6 @@ const config: webpack.Configuration = {
 
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: REGEXP_SCRIPT,
-        include: paths.appSrc,
-        exclude: paths.appNodeModules,
-        use: ['happypack/loader?id=eslint'],
-      },
       {
         // 只匹配第一个
         oneOf: [
@@ -176,26 +173,14 @@ const config: webpack.Configuration = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     // 构建进度条
-    new ProgressBarPlugin(),
+    !process.env.CI && new ProgressBarPlugin(),
 
     // lodash 按需打包
     new LodashModuleReplacementPlugin({
       paths: true, // 解决 `get` 取值报错的问题
     }),
 
-    new HappyPack({
-      id: 'eslint',
-      // 使用共享进程池中的子进程去处理任务
-      threadPool: happyThreadPool,
-      loaders: [
-        {
-          loader: 'eslint-loader',
-          options: {
-            cache: true, // 缓存lint结果，可以减少lint时间
-          },
-        },
-      ],
-    }),
+    new ESLintWebpackPlugin(),
 
     new HappyPack({
       id: 'babel',
@@ -210,7 +195,7 @@ const config: webpack.Configuration = {
         },
       ],
     }),
-  ],
+  ].filter(Boolean),
 
   node: {
     dgram: 'empty',
