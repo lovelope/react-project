@@ -16,11 +16,7 @@ module.exports = {
     },
   },
 
-  extends: [
-    'eslint-config-airbnb',
-    'eslint-config-prettier',
-    'eslint-config-prettier/react',
-  ],
+  extends: ['eslint-config-airbnb', 'eslint-config-prettier'],
   plugins: ['eslint-plugin-react-hooks', 'eslint-plugin-prettier'],
 
   env: {
@@ -99,7 +95,6 @@ module.exports = {
       extends: [
         'plugin:@typescript-eslint/recommended',
         'eslint-config-prettier',
-        'eslint-config-prettier/@typescript-eslint',
       ],
       plugins: [
         'eslint-plugin-react-hooks',
