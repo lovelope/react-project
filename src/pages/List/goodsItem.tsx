@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { Goods } from '@/store';
 import s from './goodsItem.module.less';
