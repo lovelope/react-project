@@ -6,7 +6,7 @@ import { merge } from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Terser from 'terser';
 import TerserPlugin from 'terser-webpack-plugin';
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
@@ -77,25 +77,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
           safari10: true,
         },
       }),
-      new OptimizeCSSAssetsPlugin({
-        assetNameRegExp: /\.css\.*(?!.*map)/g, // 注意不要写成 /\.css$/g
-        // eslint-disable-next-line global-require
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: {
-          // 使用安全模式，避免 cssnano 重新计算 z-index
-          safe: true,
-
-          // 默认不移除许可证注释，这里移除所有
-          discardComments: { removeAll: true },
-
-          // cssnano 集成了autoprefixer的功能
-          // 会使用到autoprefixer进行无关前缀的清理
-          // 关闭autoprefixer功能
-          // 使用postcss的autoprefixer功能
-          autoprefixer: false,
-        },
-        canPrint: true,
-      }),
+      new CssMinimizerPlugin(),
     ],
     splitChunks: {
       chunks: 'all',
@@ -140,7 +122,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
       new webpack.DllReferencePlugin({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         manifest: manifestJson as any,
-      } as webpack.DllReferencePlugin.Options),
+      }),
 
     USE_DLL &&
       new HtmlWebpackTagsPlugin({
@@ -168,17 +150,19 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
         {
           from: paths.appPublic,
           to: paths.appDist,
-          transform(content, filePath): string {
+          async transform(content, filePath): Promise<string> {
             if (filePath.endsWith('.js')) {
               // 将 Buffer(content) 转为 String(source)
               const source = content.toString('utf8');
-              const { code } = Terser.minify(source);
+              const { code } = await Terser.minify(source);
               return code as string;
             }
             return content;
           },
           globOptions: {
-            ignore: ['index.html'],
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html'],
           },
         },
       ],

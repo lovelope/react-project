@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import moment, { Moment } from 'moment';
-import { Button } from 'antd';
+import { Button, Form } from 'antd';
+import { useForm } from 'antd/es/form/Form';
 
-import DefineForm, {
-  defaultLabelColSpan,
-  DefineFormProps,
-} from '@/components/DefineForm';
+import DefineForm, { defaultLabelColSpan } from '@/components/DefineForm';
 
 // formItems即为表单的配置项
 import formItems from './customFormItems';
@@ -41,19 +39,10 @@ const requestDetail = (): Promise<DefineData> =>
     }, 1500);
   });
 
-class Edit extends Component {
-  // form instance
-  private formRef: React.ReactComponentElement<
-    typeof DefineForm,
-    DefineFormProps
-  > | null;
+const Edit: React.FC = () => {
+  const [form] = useForm();
 
-  public constructor(props: Readonly<unknown>) {
-    super(props);
-    this.formRef = null;
-  }
-
-  private handleGetDetail = (): void => {
+  const handleGetDetail = (): void => {
     requestDetail().then((res: DefineData): void => {
       // 如果字段的值是日期，要先转成moment格式
       res.DatePicker = moment(res.DatePicker);
@@ -61,52 +50,41 @@ class Edit extends Component {
         moment(res.RangePicker[0]),
         moment(res.RangePicker[1]),
       ];
-      if (this.formRef) {
-        this.formRef.props.form.setFieldsValue(res);
+      if (form) {
+        form.setFieldsValue(res);
       }
     });
   };
 
-  private handleSubmit = (): void => {
-    if (this.formRef) {
-      this.formRef.props.form.validateFieldsAndScroll((err, values): void => {
-        console.info(values);
-        if (err) {
-          return;
-        }
-        console.info('校验通过');
-      });
-    }
+  const handleFinish = (values): void => {
+    console.info(values);
   };
 
-  public render(): React.ReactElement {
-    return (
-      <div>
-        <Button
-          style={{ margin: 24 }}
-          type="primary"
-          onClick={this.handleGetDetail}
-        >
-          模拟请求数据然后设置表单值
-        </Button>
+  const handleFinishFailed = (errorInfo): void => {
+    console.error(errorInfo);
+  };
 
-        <DefineForm
-          wrappedComponentRef={(node): void => {
-            this.formRef = node;
-          }}
-          items={formItems}
-        />
+  return (
+    <Form
+      form={form}
+      onFinish={handleFinish}
+      onFinishFailed={handleFinishFailed}
+    >
+      <Button style={{ margin: 24 }} type="primary" onClick={handleGetDetail}>
+        模拟请求数据然后设置表单值
+      </Button>
 
-        <Button
-          style={{ marginLeft: `${(defaultLabelColSpan / 24) * 100}%` }}
-          type="primary"
-          onClick={this.handleSubmit}
-        >
-          提交
-        </Button>
-      </div>
-    );
-  }
-}
+      <DefineForm items={formItems as any} />
+
+      <Button
+        style={{ marginLeft: `${(defaultLabelColSpan / 24) * 100}%` }}
+        type="primary"
+        htmlType="submit"
+      >
+        提交
+      </Button>
+    </Form>
+  );
+};
 
 export default Edit;

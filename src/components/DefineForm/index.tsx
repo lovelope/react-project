@@ -1,10 +1,48 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Component } from 'react';
-import { Form, Input } from 'antd';
-import { ValidationRule, WrappedFormUtils } from 'antd/es/form/Form';
+import React, { Component, createElement } from 'react';
+import {
+  Form,
+  AutoComplete,
+  Cascader,
+  Checkbox,
+  DatePicker,
+  Input,
+  InputNumber,
+  Mentions,
+  Radio,
+  Rate,
+  Select,
+  Switch,
+  TimePicker,
+  Transfer,
+  TreeSelect,
+  Upload,
+} from 'antd';
+import { FormItemProps } from 'antd/es/form/FormItem';
 import { ColProps } from 'antd/es/grid/col';
 
 const FormItem = Form.Item;
+
+const Components = {
+  AutoComplete,
+  Cascader,
+  Checkbox,
+  DatePicker,
+  Input,
+  Search: Input.Search,
+  TextArea: Input.TextArea,
+  Password: Input.Password,
+  InputNumber,
+  Mentions,
+  Radio,
+  Rate,
+  Select,
+  Switch,
+  TimePicker,
+  Transfer,
+  TreeSelect,
+  Upload,
+};
 
 interface DefineFormItemLayout {
   labelCol?: ColProps;
@@ -21,39 +59,45 @@ export interface DefineFormItem {
   key: string;
   label?: string;
   required?: boolean;
-  component?: React.ReactElement;
+  component: keyof typeof Components;
   options?: {
     [key: string]: unknown;
   };
-  rules?: ValidationRule[];
+  rules: FormItemProps['rules'];
 }
 
 interface FormItemRenderProps {
   item: DefineFormItem;
   // eslint-disable-next-line react/require-default-props
   layout?: DefineFormItemLayout;
-  getFieldDecorator: WrappedFormUtils['getFieldDecorator'];
+  // getFieldDecorator: WrappedFormUtils['getFieldDecorator'];
 }
 // 渲染单个表单项
 const FormItemRender = ({
   item,
   layout,
-  getFieldDecorator,
-}: FormItemRenderProps): React.ReactElement => {
+}: // getFieldDecorator,
+FormItemRenderProps): React.ReactElement => {
   const { label, key, required, component, options = {}, rules } = item;
+  const valuePropName = ['Checkbox', 'Switch'].includes(component)
+    ? 'checked'
+    : 'value';
   return (
-    <FormItem key={key} label={label} {...layout}>
-      {getFieldDecorator(key, {
-        ...options,
-        rules: rules || [{ required, message: `${label}为空` }],
-      })(component || <Input />)}
+    <FormItem
+      key={key}
+      name={key}
+      label={label}
+      rules={rules || [{ required, message: `${label}为空` }]}
+      valuePropName={valuePropName}
+      {...options}
+      {...layout}
+    >
+      {createElement(Components[component] as any, options)}
     </FormItem>
   );
 };
 
 export interface DefineFormProps {
-  form: WrappedFormUtils;
-  wrappedComponentRef?: unknown;
   items: DefineFormItem[];
   layout?: DefineFormItemLayout;
 }
@@ -66,27 +110,16 @@ class DefineForm extends Component<DefineFormProps> {
     layout: defaultFormItemLayout,
   };
 
-  public render(): React.ReactElement {
+  public render(): React.ReactElement[] {
     // items格式即为配置的表单项
-    const {
-      items,
-      layout,
-      form: { getFieldDecorator },
-    } = this.props;
+    const { items, layout } = this.props;
 
-    return (
-      <Form>
-        {(items || []).map(
-          (item): React.ReactElement => (
-            <FormItemRender
-              key={item.key}
-              {...{ item, layout, getFieldDecorator }}
-            />
-          )
-        )}
-      </Form>
+    return (items || []).map(
+      (item): React.ReactElement => (
+        <FormItemRender key={item.key} {...{ item, layout }} />
+      )
     );
   }
 }
 
-export default Form.create<DefineFormProps>()(DefineForm);
+export default DefineForm;

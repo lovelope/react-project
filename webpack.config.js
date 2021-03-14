@@ -1,3 +1,4 @@
+require('regenerator-runtime');
 require('@babel/register')({
   extensions: ['.ts', '.js'],
 });

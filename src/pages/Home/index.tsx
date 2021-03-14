@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'antd';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import style from './index.module.less';
 
 type Props = AnyObject;
 interface State {
-  value: Moment | null;
+  value: Dayjs | null;
 }
 class Home extends Component<Props, State> {
   public constructor(props: Readonly<Props>) {
@@ -25,7 +25,7 @@ class Home extends Component<Props, State> {
     return (
       <div className={style['page-home']}>
         <h1>Home</h1>
-        <DatePicker value={value as Moment} onChange={this.handleChange} />
+        <DatePicker value={value as any} onChange={this.handleChange} />
       </div>
     );
   }
