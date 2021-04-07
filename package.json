@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "antd": "^4.15.0",
-    "core-js": "^3.10.0",
+    "core-js": "^3.10.1",
     "dayjs": "^1.10.4",
     "history": "4.x",
     "js-cookie": "^2.2.1",
