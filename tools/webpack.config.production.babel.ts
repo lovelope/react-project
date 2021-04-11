@@ -89,6 +89,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash:8].css' : '[name].css',
       chunkFilename: isProd ? 'css/[id].[contenthash:8].css' : '[id].css',
+      ignoreOrder: true,
     }),
 
     new HtmlWebpackPlugin({

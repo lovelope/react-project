@@ -189,13 +189,6 @@ const config: webpack.Configuration = {
     performance: false,
   },
 
-  ignoreWarnings: [
-    {
-      // 关闭 less 文件顺序警告
-      message: /mini-css-extract-plugin/,
-    },
-  ],
-
   performance: false,
 };
 
