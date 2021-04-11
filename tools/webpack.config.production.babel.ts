@@ -18,11 +18,7 @@ import urls from './urls';
 import getValueByEnv from './getValueByEnv';
 import switchConfig from './switch.config';
 
-const {
-  USE_DLL,
-  OPEN_SOURCE_MAP,
-  USE_PRIVATE_SOURCE_MAP_SERVER,
-} = switchConfig;
+const { USE_DLL, USE_PRIVATE_SOURCE_MAP_SERVER } = switchConfig;
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -55,9 +51,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
-        sourceMap: OPEN_SOURCE_MAP,
         terserOptions: {
           ecma: undefined,
           warnings: false,
