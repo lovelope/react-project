@@ -41,7 +41,7 @@
     ]
   },
   "dependencies": {
-    "antd": "^4.15.4",
+    "antd": "^4.15.5",
     "core-js": "^3.12.1",
     "dayjs": "^1.10.4",
     "history": "4.x",
