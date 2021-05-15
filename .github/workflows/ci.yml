@@ -52,7 +52,7 @@ jobs:
           yarn build
 
       - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.1.1
+        uses: easingthemes/ssh-deploy@v2.1.7
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: '-rltgoDzvO'
