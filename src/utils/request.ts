@@ -152,11 +152,8 @@ class R {
 
   public fetch(url: string, options: InputOptions) {
     const fullInputOptions = merge({}, this.defaultOptions, options);
-    const {
-      transformRequest,
-      transformResponse,
-      ...restOptions
-    } = fullInputOptions;
+    const { transformRequest, transformResponse, ...restOptions } =
+      fullInputOptions;
 
     let requestPromise = Promise.resolve({ url, ...restOptions });
     requestPromise = this.interceptors.request.compose(
