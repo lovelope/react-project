@@ -22,7 +22,7 @@ jobs:
           submodules: true
 
       - name: Install nodejs
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.2.0
         with:
           node-version: '12.x'
 
