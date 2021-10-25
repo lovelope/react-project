@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-latest, windows-2019, ubuntu-16.04]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
     steps:
       - name: Configure git
         run: |
@@ -60,4 +60,4 @@ jobs:
       #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
       #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
-      #   if: matrix.os == 'ubuntu-16.04'
+      #   if: matrix.os == 'ubuntu-latest'
