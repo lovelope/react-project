@@ -4,6 +4,7 @@ module.exports = {
   plugins: [
     ['@babel/plugin-proposal-decorators', { legacy: true }], // 修饰器支持，顺序必须在 `proposal-class-properties` 之前
     ['@babel/plugin-proposal-class-properties', { loose: true }], // 支持 `handleChange = () => {}` 语法
+    ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
     '@babel/plugin-syntax-dynamic-import', // 支持 `() => import('./Home')` 语法
     'babel-plugin-lodash', // 按需引入 lodash
     [
