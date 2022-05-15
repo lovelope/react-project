@@ -74,7 +74,9 @@ const config: webpack.Configuration = {
                 loader: 'url-loader',
                 options: {
                   limit: 10000,
-                  name: 'img/[name].[hash:8].[ext]',
+                  name: isProd
+                    ? 'img/[name].[contenthash:8].[ext]'
+                    : 'img/[name].[ext]',
                 },
               },
             ],

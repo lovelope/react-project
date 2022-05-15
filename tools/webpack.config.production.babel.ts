@@ -54,7 +54,6 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
         parallel: true,
         terserOptions: {
           ecma: undefined,
-          warnings: false,
           parse: {},
           compress: {
             drop_debugger: true, // 删除 debugger
@@ -121,7 +120,7 @@ const webpackConfigProd: webpack.Configuration = merge(webpackConfigBase, {
 
     USE_DLL &&
       new HtmlWebpackTagsPlugin({
-        tags: ['dll/vendor.dll.js'], //  添加的资源相对html的路径
+        tags: ['dll/vendor.dll.js'], // 添加的资源相对html的路径
         append: false, // false 在其他资源的之前添加 true 在其他资源之后添加
       }),
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'antd';
 import { Dayjs } from 'dayjs';
+import pkg from '@/assets/images/pkg.png';
 import style from './index.module.less';
 
 type Props = AnyObject;
@@ -25,6 +26,7 @@ class Home extends Component<Props, State> {
     return (
       <div className={style['page-home']}>
         <h1>Home</h1>
+        <img src={pkg} alt="pkg" />
         <DatePicker value={value as any} onChange={this.handleChange} />
       </div>
     );
