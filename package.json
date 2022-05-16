@@ -45,7 +45,7 @@
     "core-js": "3.x",
     "dayjs": "^1.11.2",
     "history": "4.x",
-    "js-cookie": "^2.2.1",
+    "js-cookie": "^3.0.1",
     "lodash": "4.x",
     "mobx": "^6.5.0",
     "mobx-react": "^7.4.0",
