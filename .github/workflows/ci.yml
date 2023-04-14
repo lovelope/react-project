@@ -16,7 +16,7 @@ jobs:
           git config --global core.autocrlf input
 
       - name: Clone repository
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 1
           submodules: true
